@@ -4,20 +4,36 @@
     <title>Gallery</title>
     <link href="style/main.css" rel="stylesheet" type="text/css"/>
     <link href="style/form.css" rel="stylesheet" type="text/css"/>
+    <link href="style/viewimage.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <header>
         <a href="/" id="title">Gallery</a>
     </header>
 
-      <form class="complex_form" id="upload_image_form">
-        <div class="form_title">Upload an image</div>
-        <input type="text" id="upload_image_title" class="form_element" placeholder="Enter a title for the image" name="image_title" required/>
-        <input type="text" id="upload_image_author" class="form_element" placeholder="Enter your full name" name="author_name" required/>
-        <input type="text" id="upload_image_description" class="form_element" placeholder="Enter a description" name="image_description" required/>
-        <input type="file" id="upload_image_file" class="form_file_browse" name="image_file" accept="image/png, image/jpeg" required/>
-        <input type="date" id="upload_image_date_taken" class="form_element" name="image_date_taken" required/>
-        <button type="submit" class="form_submit">Upload your image</button>
-      </form>
+    <form class="complex_form" id="upload_image_form">
+      <div class="form_title">Upload an image</div>
+      <input type="text" id="upload_image_title" class="form_element" placeholder="Enter a title for the image" name="image_title" required/>
+      <input type="text" id="upload_image_author" class="form_element" placeholder="Enter your full name" name="author_name" required/>
+      <input type="text" id="upload_image_description" class="form_element" placeholder="Enter a description" name="image_description" required/>
+      <input type="file" id="upload_image_file" class="form_file_browse" name="image_file" accept="image/png, image/jpeg" required/>
+      <input type="date" id="upload_image_date_taken" class="form_element" name="image_date_taken" required/>
+      <button type="submit" class="form_submit">Upload your image</button>
+    </form>
+
+    <div id="image_section">
+      <div id="navigators">
+        <button type="submit" class="nav" id="prev_image">prev</button>
+        <button type="submit" class="nav" id="next_image">next</button>
+        <button type="submit" class="nav" id="delete_image">delete</button>
+      </div>
+      <div id="image_and_info">
+        <span class="title" id="image_info">Author</span>
+        <br>
+        <img id="displayed_image" width="600" height="400">
+      </div>
+    </div>
+
+    <script src="js/api.js"></script>
 </body>
 </html>

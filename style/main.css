@@ -17,11 +17,11 @@ header {
 	justify-content: flex-end;
 	margin-top: 36px;
 	height: 64px;
+	padding-bottom: 15px;
 }
 
 header #title {
 	color: #FFFFFF;
-	margin: 0px;
 	width: 100%;
 	font-size: 50px;
 	text-align: center;
