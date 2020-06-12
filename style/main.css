@@ -3,10 +3,10 @@ html {
 }
 
 body {
-	background: #FFFFFF;
+	background: radial-gradient(#2C2D2F, #182930);
 	font-family: Helvetica, sans-serif;
 	font-size: 14px;
-	color: #3C3D3F;
+	color: #FFFFFF;
 	text-align: left;
 	max-width: 1200px;
 	margin: auto;
@@ -20,7 +20,7 @@ header {
 }
 
 header #title {
-	color: black;
+	color: #FFFFFF;
 	margin: 0px;
 	width: 100%;
 	font-size: 50px;
