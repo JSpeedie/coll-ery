@@ -9,5 +9,16 @@ body {
 
 header {
 	display: flex;
+	margin-top: 36px;
+	height: 64px;
 	justify-content: flex-end;
+}
+
+header #title {
+	color: black;
+	margin: 0px;
+	width: 100%;
+	font-size: 60px;
+	text-align: center;
+	text-decoration: none;
 }
