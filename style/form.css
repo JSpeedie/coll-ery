@@ -3,4 +3,19 @@
 	border: 2px #4A5D23 solid;
 	display: flex;
 	flex-direction: column;
+	padding: 10px;
+}
+
+.complex_form .form_element {
+	margin: 5px 10px 5px 10px;
+	font-size: 20px;
+	border: 0px;
+	border-bottom: 2px solid cyan;
+}
+
+.complex_form .form_submit {
+	margin: 5px 10px 5px 10px;
+	padding: 10px;
+	font-size: 20px;
+	border: 0px;
 }
