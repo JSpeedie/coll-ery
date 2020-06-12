@@ -1,0 +1,13 @@
+html {
+	overflow: -moz-scrollbars-vertical;
+}
+
+body {
+	background: #FFFFFF;
+	margin: auto;
+}
+
+header {
+	display: flex;
+	justify-content: flex-end;
+}
