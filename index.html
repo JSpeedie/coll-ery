@@ -11,7 +11,7 @@
         <a href="/" id="title">Gallery</a>
     </header>
 
-    <form class="complex_form" id="upload_image_form">
+    <form class="complex_form" id="upload_image_form" action='/api/images/' method='POST' enctype="multipart/form-data">
       <div class="form_title">Upload an image</div>
       <input type="text" id="upload_image_title" class="form_element" placeholder="Enter a title for the image" name="image_title" required/>
       <input type="text" id="upload_image_author" class="form_element" placeholder="Enter your full name" name="author_name" required/>
