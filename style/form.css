@@ -1,0 +1,6 @@
+.complex_form {
+	border-radius: 5px;
+	border: 2px #4A5D23 solid;
+	display: flex;
+	flex-direction: column;
+}
