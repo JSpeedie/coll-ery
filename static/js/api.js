@@ -65,16 +65,25 @@ var api = (function(){
         send("GET", "/api/images/", null, callback);
     }
 
+
+	/* register an image listener
+	 * to be notified when an image is added or deleted from the gallery */
+	module.onImageUpdate = function(listener){
+		imageListeners.push(listener);
+		getImages(function(err, images){
+			if (err) return notifyErrorListeners(err);
+			listener(images);
+		});
+	}
+
 	function notifyImageListeners(){
-		// getImages(function(err, images){
-		// 	if (err) return notifyErrorListeners(err);
-		// 	imageListeners.forEach(function(listener){
-		// 		listener(images);
-		// 	});
-		// });
+		getImages(function(err, images) {
+			console.log("calling listener for image");
+			if (err) return notifyErrorListeners(err);
 			imageListeners.forEach(function(listener){
 				listener(images);
 			});
+		});
 	}
 
 	// register an image listener
