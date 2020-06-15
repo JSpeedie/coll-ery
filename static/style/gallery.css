@@ -50,7 +50,6 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	/* transition: height 1s ease-in-out; */
 }
 
 .individual_image_info_div:hover {
