@@ -1,0 +1,33 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Gallery</title>
+    <link href="style/main.css" rel="stylesheet" type="text/css"/>
+    <link href="style/gallery.css" rel="stylesheet" type="text/css"/>
+    <link href="style/viewimage.css" rel="stylesheet" type="text/css"/>
+	<script src="js/gallery_script.js"></script>
+</head>
+<body>
+    <header>
+        <a href="/" id="title">Gallery</a>
+    </header>
+
+    <div id="images_container">
+	</div>
+
+    <div id="image_section">
+      <div id="navigators">
+        <button type="submit" class="nav" id="prev_image">prev</button>
+        <button type="submit" class="nav" id="next_image">next</button>
+        <button type="submit" class="nav" id="delete_image">delete</button>
+      </div>
+      <div id="image_and_info">
+        <span class="title" id="image_info">Author</span>
+        <br>
+      </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</body>
+</html>
