@@ -19,7 +19,17 @@ app.use(function (req, res, next){
 });
 
 let ImageId = (function() {
-	let id = 0;
+	let id = 1;
+	/* Read the number of images on the server/in storage and adjust the next
+	 * id as needed */
+	images.count({}, function (err, count) {
+		if (err) {
+			console.log("There was an error counting the number of images in the system");
+		} else {
+			id = count + 1;
+			console.log("The next id for an image will be: " + id);
+		}
+	});
 
 	return function image() {
 		this._id = id++;
