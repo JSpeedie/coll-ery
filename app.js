@@ -62,7 +62,6 @@ app.post('/api/images/', upload.single('image_file'), function (req, res, next) 
 		/* This must be req.file as opposed to req.body.x or something */
 		image: req.file
 		};
-	console.log(new_image_obj);
 	/* Store object in database */
 	images.insert(new_image_obj, function(err, newDoc) {});
 	// Respond to requester
@@ -94,7 +93,6 @@ app.get('/api/images/:id/', function (req, res, next) {
 // Retrieve all images
 app.get('/api/images/', function (req, res, next) {
 	images.find({}).exec(function(err, data) {
-		console.log(data); // TODO: remove
 		return res.json(data);
 	});
 });
