@@ -60,6 +60,11 @@ var api = (function(){
 		});
 	}
 
+
+    let getImages = function(callback){
+        send("GET", "/api/images/", null, callback);
+    }
+
 	function notifyImageListeners(){
 		// getImages(function(err, images){
 		// 	if (err) return notifyErrorListeners(err);
