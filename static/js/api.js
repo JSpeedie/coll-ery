@@ -2,6 +2,7 @@ var api = (function(){
 	var module = {};
 
     let imageListeners = [];
+	let errorListeners = [];
 
 	/* Helper function for sending data */
 	function send(method, url, data, callback) {
@@ -80,6 +81,14 @@ var api = (function(){
 		// 	listener(images);
 		// });
 		listener(null);
+	module.onError = function(listener){
+		errorListeners.push(listener);
+	};
+
+	function notifyErrorListeners(err){
+		errorListeners.forEach(function(listener){
+			listener(err);
+		});
 	}
 
 	return module;
