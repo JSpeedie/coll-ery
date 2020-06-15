@@ -7,6 +7,17 @@
 	box-shadow: 0 0 10px 2px #548ca5;
 }
 
+.form_title {
+	background: #548ca5;
+	color: #eeeeee;
+	margin: -10px -10px 10px -10px;
+	padding: 10px;
+	text-align: center;
+	font-size: 16px;
+	font-style: oblique;
+	letter-spacing: 0.3em;
+}
+
 .complex_form .form_element {
 	margin: 5px 10px 5px 10px;
 	font-size: 20px;
@@ -21,9 +32,20 @@
 	font-size: 20px;
 }
 
-.complex_form .form_submit {
-	margin: 5px 10px 5px 10px;
+.button {
+	/* Speed of transition to .button:hover */
+	transition-duration: 0.3s;
+	margin: 20px 10px 10px 10px;
 	padding: 10px;
 	font-size: 20px;
-	border: 0px;
+	background: transparent;
+	border-radius: 5px;
+	border: 2px solid #548ca5;
+	color: #989c9d;
+}
+
+.button:hover {
+	box-shadow: 0 0 5px 2px #548ca5;
+	color: #ffffff;
+	cursor: pointer;
 }

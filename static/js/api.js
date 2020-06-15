@@ -86,15 +86,6 @@ var api = (function(){
 		});
 	}
 
-	// register an image listener
-	// to be notified when an image is added or deleted from the gallery
-	module.onImageUpdate = function(listener){
-		// imageListeners.push(listener);
-		// getImages(function(err, images){
-		// 	if (err) return notifyErrorListeners(err);
-		// 	listener(images);
-		// });
-		listener(null);
 	module.onError = function(listener){
 		errorListeners.push(listener);
 	};
