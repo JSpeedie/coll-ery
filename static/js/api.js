@@ -1,7 +1,8 @@
 var api = (function(){
 	var module = {};
 
-    let imageListeners = [];
+	let imageListeners = [];
+	let collectionListeners = [];
 	let errorListeners = [];
 
 	/* Helper function for sending data */
@@ -60,13 +61,11 @@ var api = (function(){
 		});
 	}
 
+	let getImages = function(callback){
+		send("GET", "/api/images/", null, callback);
+	}
 
-    let getImages = function(callback){
-        send("GET", "/api/images/", null, callback);
-    }
-
-
-	/* register an image listener
+	/* Register an image listener
 	 * to be notified when an image is added or deleted from the gallery */
 	module.onImageUpdate = function(listener){
 		imageListeners.push(listener);
@@ -86,6 +85,35 @@ var api = (function(){
 		});
 	}
 
+
+
+	let getCollections = function(callback){
+		send("GET", "/api/collections/", null, callback);
+	}
+
+	/* Register an collection listener
+	 * to be notified when an collection is added or deleted from the gallery */
+	module.onCollectionUpdate = function(listener){
+		collectionListeners.push(listener);
+		getCollections(function(err, collections){
+			if (err) return notifyErrorListeners(err);
+			listener(collections);
+		});
+	}
+
+	function notifyCollectionListeners(){
+		getCollections(function(err, collections) {
+			console.log("calling listener for collection");
+			if (err) return notifyErrorListeners(err);
+			collectionListeners.forEach(function(listener){
+				listener(collections);
+			});
+		});
+	}
+
+
+
+	/* Register an error listener to be notified when there is an error */
 	module.onError = function(listener){
 		errorListeners.push(listener);
 	};

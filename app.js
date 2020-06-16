@@ -9,7 +9,7 @@ var multer = require('multer');
 var upload = multer({dest: 'uploads/'});
 
 var Datastore = require('nedb')
-	, collections = new Datastore({ filename: 'db/collections.db', autoload: true });
+	, collections = new Datastore({ filename: 'db/collections.db', autoload: true })
 	, images = new Datastore({ filename: 'db/images.db', autoload: true });
 
 app.use(express.static('static'));
@@ -52,6 +52,7 @@ let ImageId = (function() {
  * - _id
  * - title
  * - description
+ * - thumbnail_image_id
  * - images[]
  */
 
@@ -136,10 +137,17 @@ app.post('/api/collections/', function (req, res, next) {
 
 	// TODO: translate content to a json array for storage
 	new_collection_images = req.body.images;
-	console.log("new_collection_images:");
-	console.log(new_collection_images);
 	if (new_collection_images == null) {
 		new_collection_images = {};
+	}
+	/* If the user did not specify a thumbnail image id */
+	new_collection_thumbnail_image_id = req.body.collection_thumbnail_image_id;
+	if (!new_collection_thumbnail_image_id.trim()) {
+		new_collection_thumbnail_image_id = null;
+	/* If they did specify a thumbnail image id, convert to an int */
+	} else {
+		new_collection_thumbnail_image_id = 
+			parseInt(new_collection_thumbnail_image_id)
 	}
 
 	/* Create storage object */
@@ -149,6 +157,7 @@ app.post('/api/collections/', function (req, res, next) {
 		 * in the HTML */
 		title: req.body.collection_title,
 		description: req.body.collection_description,
+		thumbnail_image_id: new_collection_thumbnail_image_id,
 		images: new_collection_images
 	};
 	console.log("inserting new collection with id of " + newCollectionId._id);
@@ -157,7 +166,7 @@ app.post('/api/collections/', function (req, res, next) {
 	// Respond to requester
 	//res.json(newCollection);
 
-	return res.redirect('/');
+	return res.redirect('/add_collection.html');
 });
 
 
