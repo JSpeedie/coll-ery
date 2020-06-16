@@ -70,9 +70,7 @@ let CollectionId = (function() {
 	});
 
 	return function collection() {
-		console.log("The id for this collection will be: " + id);
 		this._id = id++;
-		console.log("The next id for an collection will be: " + id);
 	}
 }());
 
@@ -93,6 +91,8 @@ app.post('/api/images/', upload.single('image_file'), function (req, res, next) 
 		/* This must be req.file as opposed to req.body.x or something */
 		image: req.file
 		};
+	console.log("inserting new collection with id of " + newImageId._id + " which looks like:");
+	console.log(new_image_obj);
 	/* Store object in database */
 	images.insert(new_image_obj, function(err, newDoc) {});
 	// Respond to requester
@@ -160,7 +160,8 @@ app.post('/api/collections/', function (req, res, next) {
 		thumbnail_image_id: new_collection_thumbnail_image_id,
 		images: new_collection_images
 	};
-	console.log("inserting new collection with id of " + newCollectionId._id);
+	console.log("inserting new collection with id of " + newCollectionId._id + " which looks like:");
+	console.log(new_collection_obj);
 	/* Store object in database */
 	collections.insert(new_collection_obj, function(err, newDoc) {});
 	// Respond to requester

@@ -54,7 +54,6 @@ var api = (function(){
 			description: image_description,
 			author: author_name
 		}
-		console.log("about to send POST");
 		send("POST", "/api/images/", image_info, image_file, function(err, res){
 			// TODO: fix
 			//if (err) return notifyErrorListeners(err);
@@ -79,7 +78,6 @@ var api = (function(){
 
 	function notifyImageListeners(){
 		getImages(function(err, images) {
-			console.log("calling listener for image");
 			if (err) return notifyErrorListeners(err);
 			imageListeners.forEach(function(listener){
 				listener(images);
@@ -105,7 +103,6 @@ var api = (function(){
 
 	function notifyCollectionListeners(){
 		getCollections(function(err, collections) {
-			console.log("calling listener for collection");
 			if (err) return notifyErrorListeners(err);
 			collectionListeners.forEach(function(listener){
 				listener(collections);
