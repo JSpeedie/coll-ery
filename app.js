@@ -213,6 +213,25 @@ app.get('/api/collections/', function (req, res, next) {
 	});
 });
 
+/* Delete a given collection from the gallery */
+app.delete('/api/collections/:id/', function (req, res, next) {
+	let search = {
+		_id: parseInt(req.params.id)
+	};
+
+	collections.findOne(search, function(err, doc) {
+		if (doc != null) {
+			collections.remove(search, {}, function(err, numRem) {});
+			return res.json(doc);
+		} else {
+			console.error("ERROR: Could not delete collection of that ID; collection of that ID does not exist");
+			return res.status(404).end("Image: " + req.params.id + " did not exist");
+		}
+	});
+});
+
+
+
 const http = require('http');
 const PORT = 3000;
 
