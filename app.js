@@ -101,7 +101,7 @@ app.post('/api/images/', upload.single('image_file'), function (req, res, next) 
 	return res.redirect('/');
 });
 
-// Retrieve given image from gallery
+/* Retrieve a given image from the gallery */
 app.get('/api/images/:id/', function (req, res, next) {
 	let search = {
 		_id: parseInt(req.params.id)
@@ -121,10 +121,27 @@ app.get('/api/images/:id/', function (req, res, next) {
 });
 
 // TODO: require authorization for this
-// Retrieve all images
+/* Retrieve all images from the gallery */
 app.get('/api/images/', function (req, res, next) {
 	images.find({}).exec(function(err, data) {
 		return res.json(data);
+	});
+});
+
+/* Delete a given image from the gallery */
+app.delete('/api/images/:id/', function (req, res, next) {
+	let search = {
+		_id: parseInt(req.params.id)
+	};
+
+	images.findOne(search, function(err, doc) {
+		if (doc != null) {
+			images.remove(search, {}, function(err, numRem) {});
+			return res.json(doc);
+		} else {
+			console.error("ERROR: Could not delete image of that ID; image of that ID does not exist");
+			return res.status(404).end("Image: " + req.params.id + " did not exist");
+		}
 	});
 });
 
