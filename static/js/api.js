@@ -44,6 +44,8 @@ var api = (function(){
 		}
 	}
 
+
+
 	/* Add an image to the gallery */
 	module.addImage = function(image_title, author_name, image_description, image_file, date_taken, callback) {
 		let image_info = {
