@@ -62,6 +62,16 @@ var api = (function(){
 		});
 	}
 
+	/* Delete an image from the gallery */
+	module.deleteImage = function(imageId, callback) {
+		send("DELETE", "/api/images/" + imageId + "/", null, function(err, res){
+			// TODO: fix
+			//if (err) return notifyErrorListeners(err);
+			//callback(res);
+			notifyImageListeners();
+		});
+	}
+
 	let getImages = function(callback){
 		send("GET", "/api/images/", null, callback);
 	}
