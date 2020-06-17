@@ -107,6 +107,17 @@ app.get('/api/images/:id/', function (req, res, next) {
 		_id: parseInt(req.params.id)
 	};
 
+	images.findOne(search, function(err, doc) {
+		/* If an image of the given id exists, return that image */
+		if (doc != null) {
+			return res.json(doc);
+		} else {
+			console.error("ERROR: image does not exist");
+			return res.status(404).end("Image: " + req.params.id + " did not exist");
+		}
+	});
+});
+
 /* Retrieve a given image's image file from the gallery */
 app.get('/api/img/:id/', function (req, res, next) {
 	let search = {
