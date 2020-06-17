@@ -76,6 +76,11 @@ var api = (function(){
 		send("GET", "/api/images/", null, callback);
 	}
 
+	module.getImage = function(id, callback){
+		console.log("sending call for \"/api/images/" + id + "/\"");
+		send("GET", "/api/images/" + id + "/", null, callback);
+	}
+
 	/* Register an image listener
 	 * to be notified when an image is added or deleted from the gallery */
 	module.onImageUpdate = function(listener){
