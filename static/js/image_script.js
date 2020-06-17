@@ -39,11 +39,6 @@ window.onload = function() {
 		let viewimagetitlecontrols = document.createElement('div');
 		viewimagetitlecontrols.className = "view_image_title_controls";
 		viewimagetitlecontrols.innerHTML = "X";
-		// viewimagetitlecontrols.onclick = function() {
-		// 	if (window.confirm("Are you sure you want to delete the image \"" + image.title + "\"?")) {
-		// 		api.deleteImage(image._id, function() {});
-		// 	}
-		// };
 	
 		viewimagetitle.appendChild(viewimagetitlecontrols);
 	
@@ -60,7 +55,7 @@ window.onload = function() {
 	
 		let viewimageinfo = document.createElement('p');
 		viewimageinfo.className = "view_image_info";
-		// TODO: more info
+		// TODO: break into multiple elements and style individually
 		viewimageinfo.innerHTML =
 			"Author: " + image.author_name + "<br>"
 			+ "Date taken: " + image.date_taken + "<br><br>"
