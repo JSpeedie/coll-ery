@@ -3,12 +3,12 @@ html {
 }
 
 body {
-	background: radial-gradient(#2C2D2F, #182930);
+	background: radial-gradient(#ffe6cc, #ffffff);
 	font-family: Helvetica, sans-serif;
 	font-size: 14px;
-	color: #FFFFFF;
+	color: #111111;
 	text-align: left;
-	max-width: 1200px;
+	max-width: 85%;
 	margin: auto;
 }
 
