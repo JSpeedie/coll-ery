@@ -119,7 +119,9 @@ var api = (function(){
 	/* Register an collection listener
 	 * to be notified when an collection is added or deleted from the gallery */
 	module.onCollectionUpdate = function(listener){
+		/* Add function to the list of collection listeners */
 		collectionListeners.push(listener);
+		/* Run this new listener of every collection currently in the system */
 		getCollections(function(err, collections){
 			if (err) return notifyErrorListeners(err);
 			listener(collections);
