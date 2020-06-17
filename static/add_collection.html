@@ -11,6 +11,12 @@
         <a href="/" id="title">Gallery</a>
     </header>
 
+    <div class="navbar">
+      <a class="navbar_link" href="gallery.html">Gallery</a>
+      <a class="navbar_link" href="add_collection.html">Create Collection</a>
+      <a class="navbar_link" href="">Upload an Image</a>
+    </div>
+
     <form class="complex_form" id="add_collection_form" action='/api/collections/' method='POST'>
       <div class="form_title">Add a collection</div>
       <input type="text" id="add_collection_title" class="form_element" placeholder="Enter a title for the collection" name="collection_title" required/>
