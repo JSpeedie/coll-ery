@@ -3,55 +3,70 @@ window.onload = function() {
 
 	api.onImageUpdate(function(images){
 		let images_container = document.getElementById("images_container");
+		images_container.innerHTML = "";
 
 		if (images == null) {
-			images_container.innerHTML = "";
 			return null;
 		}
 
 		for (let i = 0; i < images.length; i++) {
-			/* <div class="gallery_item_container">
-			 *   <div class="gallery_item_title">[titlehere]</div>
-			 *   <div class="gallery_item_preview">
-			 *     <img class="gallery_item_preview_image" height="200">
-			 *     <div class="gallery_item_info_div">
-			 *       <p class="gallery_item_info>[infohere]</p>
+			/* <a href="/image.html?i=[imageid]">
+			/*   <div class="gallery_item_container">
+			 *     <div class="gallery_item_title">[titlehere]</div>
+			 *     <div class="gallery_item_preview">
+			 *       <img class="gallery_item_preview_image" height="200">
+			 *       <div class="gallery_item_info_div">
+			 *         <p class="gallery_item_info>[infohere]</p>
+			 *       </div>
 			 *     </div>
 			 *   </div>
-			 * </div> */
-			let imgcontainer = document.createElement('div');
-			imgcontainer.className = "gallery_item_container";
-			imgcontainer.position = "absolute";
+			 * </a>
+			 * */
+			// let galleryitemlink = document.createElement('a');
+			// galleryitemlink.href = "/image.html?i=" + images[i]._id;
 
-			let imgtitle = document.createElement('div');
-			imgtitle.className = "gallery_item_title";
-			imgtitle.innerHTML = images[i].title;
+			let galleryitemcontainer = document.createElement('a');
+			galleryitemcontainer.className = "gallery_item_container";
+			galleryitemcontainer.position = "absolute";
+			galleryitemcontainer.href = "/image.html?i=" + images[i]._id;
 
-			let imgimgsec = document.createElement('div');
-			imgimgsec.className = "gallery_item_preview";
+			// let galleryitemcontainer = document.createElement('div');
+			// galleryitemcontainer.className = "gallery_item_container";
+			// galleryitemcontainer.position = "absolute";
 
-			let imgdisplay = document.createElement('img');
-			imgdisplay.className = "gallery_item_preview_image";
-			imgdisplay.height = 300;
-			imgdisplay.src = "/api/images/" + images[i]._id + "/";
+			let galleryitemtitle = document.createElement('div');
+			galleryitemtitle.className = "gallery_item_title";
+			galleryitemtitle.innerHTML = images[i].title;
 
-			let imginfodiv = document.createElement('div');
-			imginfodiv.className = "gallery_item_info_div";
+			let galleryitempreview = document.createElement('div');
+			galleryitempreview.className = "gallery_item_preview";
 
-			let imginfo = document.createElement('p');
-			imginfo.className = "gallery_item_info";
+			let galleryitemdisplay = document.createElement('img');
+			galleryitemdisplay.className = "gallery_item_preview_image";
+			galleryitemdisplay.height = 400;
+			galleryitemdisplay.src = "/api/img/" + images[i]._id + "/";
+
+			let galleryiteminfodiv = document.createElement('div');
+			galleryiteminfodiv.className = "gallery_item_info_div";
+			galleryiteminfodiv.maxWidth = galleryitemdisplay.width;
+
+			let galleryiteminfo = document.createElement('p');
+			galleryiteminfo.className = "gallery_item_info";
 			// TODO: more info
-			imginfo.innerHTML = images[i].description;
+			galleryiteminfo.innerHTML = images[i].description;
 
-			imginfodiv.appendChild(imginfo);
+			galleryiteminfodiv.appendChild(galleryiteminfo);
 
-			imgimgsec.appendChild(imgdisplay);
-			imgimgsec.appendChild(imginfodiv);
+			galleryitempreview.appendChild(galleryitemdisplay);
+			galleryitempreview.appendChild(galleryiteminfodiv);
 
-			imgcontainer.appendChild(imgtitle);
-			imgcontainer.appendChild(imgimgsec);
+			galleryitemcontainer.appendChild(galleryitempreview);
+			galleryitemcontainer.appendChild(galleryitemtitle);
 
-			images_container.appendChild(imgcontainer);
+			// galleryitemlink.appendChild(galleryitemcontainer);
+
+			// images_container.appendChild(galleryitemlink);
+			images_container.appendChild(galleryitemcontainer);
 		}
 	});
 
