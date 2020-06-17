@@ -7,6 +7,12 @@
 	box-shadow: 0 0 10px 2px #548ca5;
 }
 
+#add_collection_form {
+	max-width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .form_title {
 	background: #548ca5;
 	color: #eeeeee;
