@@ -16,14 +16,16 @@
 }
 
 .gallery_item_title {
-	background: #548ca5;
-	color: #eeeeee;
+	position: relative;
+	/* background: #548ca5; */
+	color: #111111;
 	padding: 10px;
+	padding-top: 20px;
 	text-align: center;
 	font-size: 16px;
 	font-style: oblique;
 	letter-spacing: 0.1em;
-	/* width: 100%; */
+}
 }
 
 .complex_form .form_element {
