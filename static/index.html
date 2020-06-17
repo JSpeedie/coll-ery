@@ -11,6 +11,11 @@
         <a href="/" id="title">Gallery</a>
     </header>
 
+    <div class="navbar">
+      <a class="navbar_link" href="gallery.html">Gallery</a>
+      <a class="navbar_link" href="add_collection.html">Create Collection</a>
+      <a class="navbar_link" href="">Upload an Image</a>
+    </div>
     <form class="complex_form" id="upload_image_form" action='/api/images/' method='POST' enctype="multipart/form-data">
       <div class="form_title">Upload an image</div>
       <input type="text" id="upload_image_title" class="form_element" placeholder="Enter a title for the image" name="image_title" required/>
