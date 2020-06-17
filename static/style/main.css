@@ -21,20 +21,14 @@ header {
 }
 
 header #title {
-	color: #FFFFFF;
+	color: #111111;
 	width: 100%;
 	font-size: 50px;
 	text-align: center;
-	text-decoration: none;
+	text-decoration: none;
 }
 
 footer {
 	margin-top: 20px;
 	text-align: center;
-}
-
-.form_title {
-	background: #548ca5;
-	margin: -10px;
-	padding: 10px;
 }
