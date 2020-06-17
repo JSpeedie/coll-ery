@@ -73,15 +73,17 @@ window.onload = function() {
 
 	api.onCollectionUpdate(function(collections){
 		let collections_container = document.getElementById("collections_container");
+		collections_container.innerHTML = "";
 
 		if (collections == null) {
-			collections_container.innerHTML = "";
 			return null;
 		}
 
 		for (let i = 0; i < collections.length; i++) {
 			/* <div class="gallery_item_container">
-			 *   <div class="gallery_item_title">[titlehere]</div>
+			 *   <div class="gallery_item_title">[titlehere]
+			 *     <div class="gallery_item_title_controls">X</div>
+			 *   </div>
 			 *   <div class="gallery_item_preview">
 			 *     <img class="gallery_item_preview_image" height="200">
 			 *     <div class="gallery_item_info_div">
@@ -89,39 +91,51 @@ window.onload = function() {
 			 *     </div>
 			 *   </div>
 			 * </div> */
-			let collcontainer = document.createElement('div');
-			collcontainer.className = "gallery_item_container";
-			collcontainer.position = "absolute";
+			let galleryitemcontainer = document.createElement('div');
+			galleryitemcontainer.className = "gallery_item_container";
+			galleryitemcontainer.position = "absolute";
 
-			let colltitle = document.createElement('div');
-			colltitle.className = "gallery_item_title";
-			colltitle.innerHTML = collections[i].title;
+			let galleryitemtitle = document.createElement('div');
+			galleryitemtitle.className = "gallery_item_title";
+			galleryitemtitle.innerHTML = collections[i].title;
 
-			let collcollsec = document.createElement('div');
-			collcollsec.className = "gallery_item_preview";
+			let galleryitemtitlecontrols = document.createElement('div');
+			galleryitemtitlecontrols.className = "gallery_item_title_controls";
+			galleryitemtitlecontrols.innerHTML = "X";
+			galleryitemtitlecontrols.onclick = function() {
+				if (window.confirm("Are you sure you want to delete the collection \"" + collections[i].title + "\"?")) {
+					api.deleteCollection(collections[i]._id, function() {});
+				}
+			};
 
-			let colldisplay = document.createElement('img');
-			colldisplay.className = "gallery_item_preview_image";
-			colldisplay.height = 300;
-			colldisplay.src = "/api/collections/" + collections[i].thumbnail_image_id + "/";
+			galleryitemtitle.appendChild(galleryitemtitlecontrols);
 
-			let collinfodiv = document.createElement('div');
-			collinfodiv.className = "gallery_item_info_div";
+			let galleryitempreview = document.createElement('div');
+			galleryitempreview.className = "gallery_item_preview";
 
-			let collinfo = document.createElement('p');
-			collinfo.className = "gallery_item_info";
+			let galleryitemdisplay = document.createElement('img');
+			galleryitemdisplay.className = "gallery_item_preview_image";
+			galleryitemdisplay.height = 400;
+			galleryitemdisplay.src = "/api/img/" + collections[i].thumbnail_image_id + "/";
+
+			let galleryiteminfodiv = document.createElement('div');
+			galleryiteminfodiv.className = "gallery_item_info_div";
+			galleryiteminfodiv.maxWidth = galleryitemdisplay.width;
+
+			let galleryiteminfo = document.createElement('p');
+			galleryiteminfo.className = "gallery_item_info";
 			// TODO: more info
-			collinfo.innerHTML = collections[i].description;
+			galleryiteminfo.innerHTML = collections[i].description;
 
-			collinfodiv.appendChild(collinfo);
+			galleryiteminfodiv.appendChild(galleryiteminfo);
 
-			collcollsec.appendChild(colldisplay);
-			collcollsec.appendChild(collinfodiv);
+			galleryitempreview.appendChild(galleryitemdisplay);
+			galleryitempreview.appendChild(galleryiteminfodiv);
 
-			collcontainer.appendChild(colltitle);
-			collcontainer.appendChild(collcollsec);
+			galleryitemcontainer.appendChild(galleryitempreview);
+			galleryitemcontainer.appendChild(galleryitemtitle);
 
-			collections_container.appendChild(collcontainer);
+			collections_container.appendChild(galleryitemcontainer);
 		}
 	});
 };
