@@ -49,7 +49,7 @@ window.onload = function() {
 		/* Create the img display */
         var displayedimg = document.createElement('img');
         displayedimg.id = "displayed_image";
-		displayedimg.src = "/api/images/" + image[image.length - 1]._id + "/";
+		displayedimg.src = "/api/img/" + image[image.length - 1]._id + "/";
 
 
 		imgsec.appendChild(imginfo);
