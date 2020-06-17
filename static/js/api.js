@@ -106,6 +106,16 @@ var api = (function(){
 		send("GET", "/api/collections/", null, callback);
 	}
 
+	/* Delete an collection from the gallery */
+	module.deleteCollection = function(collectionId, callback) {
+		send("DELETE", "/api/collections/" + collectionId + "/", null, function(err, res){
+			// TODO: fix
+			//if (err) return notifyErrorListeners(err);
+			//callback(res);
+			notifyCollectionListeners();
+		});
+	}
+
 	/* Register an collection listener
 	 * to be notified when an collection is added or deleted from the gallery */
 	module.onCollectionUpdate = function(listener){
