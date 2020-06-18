@@ -13,6 +13,12 @@
 	margin-right: auto;
 }
 
+#upload_image_form {
+	max-width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .form_title {
 	background: #548ca5;
 	color: #eeeeee;
