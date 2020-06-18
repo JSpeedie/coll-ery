@@ -1,0 +1,26 @@
+.view_collection_preview {
+	display: flex;
+	flex-direction: row;
+}
+
+.view_collection_preview_collection {
+	margin: 2%;
+}
+
+.view_collection_info_div {
+	width: 100%;
+}
+
+.edit_collection_info_field {
+	display: flex;
+	width: 100%;
+}
+
+input.form_element {
+	width: 100%;
+}
+
+p {
+	margin-bottom: 0px;
+	margin-top: 2.5%;
+}
