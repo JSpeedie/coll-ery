@@ -77,7 +77,6 @@ var api = (function(){
 	}
 
 	module.getImage = function(id, callback){
-		console.log("sending call for \"/api/images/" + id + "/\"");
 		send("GET", "/api/images/" + id + "/", null, callback);
 	}
 
@@ -106,13 +105,16 @@ var api = (function(){
 		send("GET", "/api/collections/", null, callback);
 	}
 
+	module.getCollection = function(id, callback){
+		send("GET", "/api/collections/" + id + "/", null, callback);
+	}
 	/* Delete an collection from the gallery */
 	module.deleteCollection = function(collectionId, callback) {
 		send("DELETE", "/api/collections/" + collectionId + "/", null, function(err, res){
 			// TODO: fix
 			//if (err) return notifyErrorListeners(err);
-			//callback(res);
 			notifyCollectionListeners();
+			callback(res);
 		});
 	}
 
