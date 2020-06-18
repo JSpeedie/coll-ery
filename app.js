@@ -172,7 +172,7 @@ app.post('/api/collections/', function (req, res, next) {
 	// TODO: translate content to a json array for storage
 	new_collection_images = req.body.images;
 	if (new_collection_images == null) {
-		new_collection_images = {};
+		new_collection_images = [];
 	}
 	/* If the user did not specify a thumbnail image id */
 	new_collection_thumbnail_image_id = req.body.collection_thumbnail_image_id;
