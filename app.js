@@ -180,7 +180,7 @@ app.post('/api/collections/', function (req, res, next) {
 		new_collection_thumbnail_image_id = null;
 	/* If they did specify a thumbnail image id, convert to an int */
 	} else {
-		new_collection_thumbnail_image_id = 
+		new_collection_thumbnail_image_id =
 			parseInt(new_collection_thumbnail_image_id)
 	}
 
@@ -229,6 +229,34 @@ app.get('/api/collections/', function (req, res, next) {
 		return res.json(data);
 	});
 });
+
+/* Change the information attached to an collection in the gallery */
+app.patch('/api/collections/:id/', function (req, res, next) {
+	let search = {
+		_id: parseInt(req.params.id)
+	};
+
+	let newCollection = req.body;
+
+	collections.findOne(search, function(err, doc) {
+		if (doc != null) {
+			collections.update(search,
+				{$set: {title: newCollection.title,
+					    description: newCollection.description,
+					    thumbnail_image_id: newCollection.thumbnail_image_id,
+					    images: newCollection.images}},
+				{}, function(err, numReplaced) {
+
+				return res.json(doc);
+			});
+		} else {
+			console.error("ERROR: invalid argument");
+			return res.status(404).end("Collection:" + search._id + " received invalid argument");
+		}
+	});
+
+});
+
 
 /* Delete a given collection from the gallery */
 app.delete('/api/collections/:id/', function (req, res, next) {
