@@ -30,10 +30,6 @@ window.onload = function() {
 			galleryitemcontainer.position = "absolute";
 			galleryitemcontainer.href = "/image.html?i=" + images[i]._id;
 
-			// let galleryitemcontainer = document.createElement('div');
-			// galleryitemcontainer.className = "gallery_item_container";
-			// galleryitemcontainer.position = "absolute";
-
 			let galleryitemtitle = document.createElement('div');
 			galleryitemtitle.className = "gallery_item_title";
 			galleryitemtitle.innerHTML = images[i].title;
@@ -110,8 +106,9 @@ window.onload = function() {
 
 			galleryitemtitle.appendChild(galleryitemtitlecontrols);
 
-			let galleryitempreview = document.createElement('div');
+			let galleryitempreview = document.createElement('a');
 			galleryitempreview.className = "gallery_item_preview";
+			galleryitempreview.href = "/edit_collection.html?c=" + collections[i]._id;
 
 			let galleryitemdisplay = document.createElement('img');
 			galleryitemdisplay.className = "gallery_item_preview_image";
