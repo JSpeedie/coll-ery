@@ -108,6 +108,13 @@ var api = (function(){
 	module.getCollection = function(id, callback){
 		send("GET", "/api/collections/" + id + "/", null, callback);
 	}
+
+	module.patchCollection = function(id, newcollection, callback){
+		send("PATCH", "/api/collections/" + id + "/", newcollection, function(err, res) {
+			callback(res);
+		});
+	}
+
 	/* Delete an collection from the gallery */
 	module.deleteCollection = function(collectionId, callback) {
 		send("DELETE", "/api/collections/" + collectionId + "/", null, function(err, res){
