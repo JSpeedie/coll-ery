@@ -50,10 +50,10 @@ window.onload = function() {
 				galleryitemtitlecontrol_delete.innerHTML = "X";
 				galleryitemtitlecontrol_delete.onclick = function() {
 					if (window.confirm(
-						"Are you sure you want to delete the collection \""
+						"Are you sure you want to delete the image \""
 						+ img.title + "\"?")) {
 
-						api.deleteCollection(img._id, function() {});
+						api.deleteImage(img._id, function() {});
 					}
 				};
 				let galleryitemtitlecontrol_edit = document.createElement('div');
@@ -61,7 +61,7 @@ window.onload = function() {
 				galleryitemtitlecontrol_edit.innerHTML = "E";
 				galleryitemtitlecontrol_edit.onclick = function() {
 					window.location.href =
-						"/edit_collection.html?c=" + img._id;
+						"/edit_image.html?c=" + img._id;
 				};
 
 				galleryitemtitlecontrols.appendChild(galleryitemtitlecontrol_edit);
@@ -73,7 +73,7 @@ window.onload = function() {
 				let galleryitempreview = document.createElement('a');
 				galleryitempreview.className = "gallery_item_preview";
 				galleryitempreview.href =
-					"/view_collection.html?c=" + img._id;
+					"/image.html?c=" + collection._id + "&i=" + img._id;
 
 				let galleryitemdisplay = document.createElement('img');
 				galleryitemdisplay.className = "gallery_item_preview_image";
