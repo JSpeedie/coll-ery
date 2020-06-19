@@ -29,11 +29,17 @@
 
 .gallery_item_title_controls {
 	position: absolute;
+	display: flex;
+	flex-direction: row;
 	top: 0;
 	left: 100%;
+}
+
+.gallery_item_title_control {
 	background: #111111;
 	color: #ffe6cc;
 	padding: 10px;
+	margin: 0.1em;
 	text-align: center;
 	font-size: 16px;
 	font-style: oblique;

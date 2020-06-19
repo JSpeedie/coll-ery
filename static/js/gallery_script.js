@@ -97,18 +97,32 @@ window.onload = function() {
 
 			let galleryitemtitlecontrols = document.createElement('div');
 			galleryitemtitlecontrols.className = "gallery_item_title_controls";
-			galleryitemtitlecontrols.innerHTML = "X";
-			galleryitemtitlecontrols.onclick = function() {
+
+			let galleryitemtitlecontrol_delete = document.createElement('div');
+			galleryitemtitlecontrol_delete.className = "gallery_item_title_control";
+			galleryitemtitlecontrol_delete.innerHTML = "X";
+			galleryitemtitlecontrol_delete.onclick = function() {
 				if (window.confirm("Are you sure you want to delete the collection \"" + collections[i].title + "\"?")) {
 					api.deleteCollection(collections[i]._id, function() {});
 				}
 			};
+			let galleryitemtitlecontrol_edit = document.createElement('div');
+			galleryitemtitlecontrol_edit.className = "gallery_item_title_control";
+			galleryitemtitlecontrol_edit.innerHTML = "E";
+			galleryitemtitlecontrol_edit.onclick = function() {
+				window.location.href =
+					"/edit_collection.html?c=" + collections[i]._id;
+			};
+
+			galleryitemtitlecontrols.appendChild(galleryitemtitlecontrol_edit);
+			galleryitemtitlecontrols.appendChild(galleryitemtitlecontrol_delete);
 
 			galleryitemtitle.appendChild(galleryitemtitlecontrols);
 
 			let galleryitempreview = document.createElement('a');
 			galleryitempreview.className = "gallery_item_preview";
-			galleryitempreview.href = "/edit_collection.html?c=" + collections[i]._id;
+			galleryitempreview.href =
+				"/view_collection.html?c=" + collections[i]._id;
 
 			let galleryitemdisplay = document.createElement('img');
 			galleryitemdisplay.className = "gallery_item_preview_image";
