@@ -31,16 +31,7 @@ app.use(function (req, res, next){
 
 let ImageId = (function() {
 	let id = 1;
-	// /* Read the number of images on the server/in storage and adjust the next
-	//  * id as needed */
-	// images.count({}, function (err, count) {
-	// 	if (err) {
-	// 		console.log("There was an error counting the number of images in the system");
-	// 	} else {
-	// 		id = count + 1;
-	// 		console.log("The next id for an image will be: " + id);
-	// 	}
-	// });
+
 	/* Reverse sort the database of images by id, choose the last image
 	 * (the one with the highest id. Next id must be 1 higher than that */
 	images.find({}, { sort: { _id: -1 }}, { limit: 1 }).exec(
@@ -68,16 +59,18 @@ let ImageId = (function() {
 
 let CollectionId = (function() {
 	let id = 1;
-	/* Read the number of collections on the server/in storage and adjust the next
-	 * id as needed */
-	collections.count({}, function (err, count) {
-		if (err) {
-			console.log("There was an error counting the number of collections in the system");
-		} else {
-			id = count + 1;
+
+	/* Reverse sort the database of collections by id, choose the last
+	 * collection (the one with the highest id. Next id must be 1 higher
+	 * than that */
+	collections.find({}, { sort: { _id: -1 }}, { limit: 1 }).exec(
+		function (err, docs) {
+			for (let i = 0; i < docs.length; i++) {
+				if (docs[i]._id + 1 > id) id = docs[i]._id + 1;
+			}
 			console.log("The next id for an collection will be: " + id);
 		}
-	});
+	);
 
 	return function collection() {
 		this._id = id++;
