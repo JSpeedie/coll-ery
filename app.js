@@ -94,14 +94,14 @@ app.post('/api/images/', upload.single('image_file'), function (req, res, next) 
 		/* This must be req.file as opposed to req.body.x or something */
 		image: req.file
 		};
-	console.log("inserting new collection with id of " + newImageId._id + " which looks like:");
+	console.log("inserting new image with id of " + newImageId._id + " which looks like:");
 	console.log(new_image_obj);
 	/* Store object in database */
 	images.insert(new_image_obj, function(err, newDoc) {});
 	// Respond to requester
 	//res.json(newImage);
 
-	return res.redirect('/');
+	return res.json(new_image_obj);
 });
 
 /* Retrieve a given image from the gallery */

@@ -21,6 +21,50 @@ window.onload = function() {
 	// }
 	//
 
+	function uploadImageFormSubmit(event) {
+		var url='/api/images/';
+		var request = new XMLHttpRequest();
+		request.open('POST', url, true);
+
+		request.onload = function() {
+			let image = JSON.parse(request.responseText);
+			// TODO: some sort of success feedback
+			let imgsec = document.getElementById("image_section");
+
+			if (image == null) {
+				imgsec.innerHTML = "";
+				return null;
+			}
+			document.getElementById("image_section").innerHTML = '';
+
+			var imginfo = document.createElement('span');
+			imginfo.className = "title";
+			imginfo.innerHTML = "\"" + image.title + "\", by "
+				+ image.author_name + ". Taken on " + " " + image.date_taken
+				+ ". \"" + image.description + "\"";
+
+			/* Create the img display */
+			var displayedimg = document.createElement('img');
+			displayedimg.id = "displayed_image";
+			displayedimg.src = "/api/img/" + image._id + "/";
+
+			imgsec.appendChild(imginfo);
+			imgsec.appendChild(displayedimg);
+		};
+		
+		request.onerror = function() {
+			// TODO: some sort of error feedback
+		};
+		
+		/* Lump data in form into a FormData obj and send to intended target */
+		request.send(new FormData(event.target));
+		event.preventDefault();
+		/* TODO: Scrub entry fields? */
+	}
+
+	// Attached modified action listener to form
+	document.getElementById("upload_image_form").addEventListener("submit", uploadImageFormSubmit);
+
 	/* Set the date picker's date to today's date */
 	var datepicker = document.querySelector('#upload_image_date_taken');
 	var date = new Date();
@@ -28,33 +72,4 @@ window.onload = function() {
 	datepicker.value = date.getFullYear().toString() + '-'
 		+ (date.getMonth() + 1).toString().padStart(2, 0) + '-'
 		+ date.getDate().toString().padStart(2, 0);
-
-
-	/* TODO: Should be removed, or moved to gallery.html */
-	api.onImageUpdate(function(image){
-		let imgsec = document.getElementById("image_section");
-
-		if (image == null) {
-			imgsec.innerHTML = "";
-			return null;
-		}
-		document.getElementById("image_section").innerHTML = '';
-
-        var imginfo = document.createElement('span');
-        imginfo.className = "title";
-		imginfo.innerHTML = "\"" + image[image.length - 1].title + "\", by "
-		 	+ image[image.length - 1].author_name + ". Taken on " + " " + image[image.length - 1].date_taken
-			+ ". \"" + image[image.length - 1].description + "\"";
-
-		/* Create the img display */
-        var displayedimg = document.createElement('img');
-        displayedimg.id = "displayed_image";
-		displayedimg.src = "/api/img/" + image[image.length - 1]._id + "/";
-
-
-		imgsec.appendChild(imginfo);
-		imgsec.appendChild(displayedimg);
-	});
-
 };
-
