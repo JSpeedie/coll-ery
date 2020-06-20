@@ -2,10 +2,41 @@ html {
 	background: #0f0f0f;
 }
 
+#image_section {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+	padding: 0px;
+	margin: 0px;
+}
+
+.view_prev_image {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	background: #0d0d0d;
+	color: white;
+	max-width: 7.5%;
+	min-width: 7.5%;
+}
+
 #image_container {
-	display:flex;
+	display: flex;
 	justify-content: flex-start;
-	flex-direction:column;
+	flex-direction: column;
+	width: 85%;
+}
+
+.view_next_image {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	background: #0d0d0d;
+	color: white;
+	max-width: 7.5%;
+	min-width: 7.5%;
 }
 
 .view_image_container {
