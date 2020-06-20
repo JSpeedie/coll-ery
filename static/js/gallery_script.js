@@ -25,17 +25,41 @@ window.onload = function() {
 			// let galleryitemlink = document.createElement('a');
 			// galleryitemlink.href = "/image.html?i=" + images[i]._id;
 
-			let galleryitemcontainer = document.createElement('a');
+			let galleryitemcontainer = document.createElement('div');
 			galleryitemcontainer.className = "gallery_item_container";
 			galleryitemcontainer.position = "absolute";
-			galleryitemcontainer.href = "/image.html?i=" + images[i]._id;
 
 			let galleryitemtitle = document.createElement('div');
 			galleryitemtitle.className = "gallery_item_title";
 			galleryitemtitle.innerHTML = images[i].title;
 
-			let galleryitempreview = document.createElement('div');
+			let galleryitemtitlecontrols = document.createElement('div');
+			galleryitemtitlecontrols.className = "gallery_item_title_controls";
+
+			let galleryitemtitlecontrol_delete = document.createElement('div');
+			galleryitemtitlecontrol_delete.className = "gallery_item_title_control";
+			galleryitemtitlecontrol_delete.innerHTML = "X";
+			galleryitemtitlecontrol_delete.onclick = function() {
+				if (window.confirm("Are you sure you want to delete the image \"" + images[i].title + "\"?")) {
+					api.deleteImage(images[i]._id, function() {});
+				}
+			};
+			// let galleryitemtitlecontrol_edit = document.createElement('div');
+			// galleryitemtitlecontrol_edit.className = "gallery_item_title_control";
+			// galleryitemtitlecontrol_edit.innerHTML = "E";
+			// galleryitemtitlecontrol_edit.onclick = function() {
+			// 	window.location.href =
+			// 		"/edit_collection.html?c=" + collections[i]._id;
+			// };
+
+			// galleryitemtitlecontrols.appendChild(galleryitemtitlecontrol_edit);
+			galleryitemtitlecontrols.appendChild(galleryitemtitlecontrol_delete);
+
+			galleryitemtitle.appendChild(galleryitemtitlecontrols);
+
+			let galleryitempreview = document.createElement('a');
 			galleryitempreview.className = "gallery_item_preview";
+			galleryitempreview.href = "/image.html?i=" + images[i]._id;
 
 			let galleryitemdisplay = document.createElement('img');
 			galleryitemdisplay.className = "gallery_item_preview_image";
