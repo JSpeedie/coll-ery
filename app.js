@@ -215,6 +215,54 @@ app.get('/api/images/', function (req, res, next) {
 	}
 });
 
+/* Change the information attached to an image in the gallery */
+app.patch('/api/images/:id/', function (req, res, next) {
+	let search = {
+		_id: ObjectId(req.params.id)
+	};
+
+	let newImage = req.body;
+
+	try {
+		MongoClient.connect(mongoUrl, mongoOptions, function(err, client) {
+
+			const db = client.db('coll-ery');
+
+			let updatePromise = function() {
+				return new Promise((resolve, reject) => {
+					try {
+						let updated = db.collection('images').findOneAndUpdate(search,
+							{$set: { title: newImage.title,
+								date_taken: newImage.date_taken,
+								description: newImage.description,
+								author_name: newImage.author_name }
+							});
+							resolve(updated);
+					/* Catch update errors */
+					} catch (err) {
+						reject(updated);
+						console.log(err);
+					}
+				});
+			};
+
+			/* Define function for calling update and waiting for result */
+			let callUpdatePromise = async function() {
+				let result = await (updatePromise());
+
+				return result;
+			}
+
+			/* Do necessary work after update promise returns */
+			callUpdatePromise().then(function(result) {
+				client.close();
+			});
+		});
+	} catch (err) {
+		console.log(err);
+	}
+});
+
 /* Delete a given image from the gallery */
 app.delete('/api/images/:id/', function (req, res, next) {
 	let search = {
