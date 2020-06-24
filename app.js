@@ -463,18 +463,44 @@ app.patch('/api/collections/:id/', function (req, res, next) {
 /* Delete a given collection from the gallery */
 app.delete('/api/collections/:id/', function (req, res, next) {
 	let search = {
-		_id: parseInt(req.params.id)
+		_id: ObjectId(req.params.id)
 	};
 
-	collections.findOne(search, function(err, doc) {
-		if (doc != null) {
-			collections.remove(search, {}, function(err, numRem) {});
-			return res.json(doc);
-		} else {
-			console.error("ERROR: Could not delete collection of that ID; collection of that ID does not exist");
-			return res.status(404).end("Image: " + req.params.id + " did not exist");
-		}
-	});
+	try {
+		MongoClient.connect(mongoUrl, mongoOptions, function(err, client) {
+
+			const db = client.db('coll-ery');
+
+			let deletionPromise = function() {
+				return new Promise((resolve, reject) => {
+					try {
+						let deleted = db.collection('collections').deleteOne(search);
+						resolve(deleted);
+					/* Catch deletion errors */
+					} catch (err) {
+						console.error("ERROR: Could not delete collection of that ID; collection of that ID does not exist");
+						console.log(err);
+						reject(deleted);
+						return res.status(404).end("Collection: " + req.params.id + " did not exist");
+					}
+				});
+			};
+
+			/* Define function for calling deletion and waiting for result */
+			let callDeletionPromise = async function() {
+				let result = await (deletionPromise());
+
+				return result;
+			}
+
+			/* Do necessary work after deletion promise returns */
+			callDeletionPromise().then(function(result) {
+				client.close();
+			});
+		});
+	} catch (err) {
+		console.log(err);
+	}
 });
 
 
