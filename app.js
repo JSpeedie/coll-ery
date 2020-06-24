@@ -8,74 +8,18 @@ app.use(bodyParser.json());
 var multer = require('multer');
 var upload = multer({dest: 'uploads/'});
 
-var Datastore = require('nedb')
-	, collections = new Datastore({ filename: 'db/collections.db', autoload: true })
-	, images = new Datastore({ filename: 'db/images.db', autoload: true });
+const mongo = require('mongodb');
+let ObjectId = require('mongodb').ObjectId;
+const MongoClient = mongo.MongoClient;
+const mongoUrl = 'mongodb://localhost:27017';
+const mongoOptions = { useNewUrlParser: true, useUnifiedTopology: true };
 
 app.use(express.static('static'));
 
 app.use(function (req, res, next){
-    console.log("HTTP request", req.method, req.url, req.body);
-    next();
+	console.log("HTTP request", req.method, req.url, req.body);
+	next();
 });
-
-/*  Image:
- * ========
- * - _id
- * - title
- * - author
- * - image
- * - description
- * - date_taken
- */
-
-let ImageId = (function() {
-	let id = 1;
-
-	/* Reverse sort the database of images by id, choose the last image
-	 * (the one with the highest id. Next id must be 1 higher than that */
-	images.find({}, { sort: { _id: -1 }}, { limit: 1 }).exec(
-		function (err, docs) {
-			for (let i = 0; i < docs.length; i++) {
-				if (docs[i]._id + 1 > id) id = docs[i]._id + 1;
-			}
-			console.log("The next id for an image will be: " + id);
-		}
-	);
-
-	return function image() {
-		this._id = id++;
-	}
-}());
-
-/*  Collection:
- * ========
- * - _id
- * - title
- * - description
- * - thumbnail_image_id
- * - images[]
- */
-
-let CollectionId = (function() {
-	let id = 1;
-
-	/* Reverse sort the database of collections by id, choose the last
-	 * collection (the one with the highest id. Next id must be 1 higher
-	 * than that */
-	collections.find({}, { sort: { _id: -1 }}, { limit: 1 }).exec(
-		function (err, docs) {
-			for (let i = 0; i < docs.length; i++) {
-				if (docs[i]._id + 1 > id) id = docs[i]._id + 1;
-			}
-			console.log("The next id for an collection will be: " + id);
-		}
-	);
-
-	return function collection() {
-		this._id = id++;
-	}
-}());
 
 
 /* Add new image to gallery */
