@@ -42,7 +42,6 @@ window.onload = function() {
         displayedimg.id = "displayed_image";
 		displayedimg.src = "/api/images/" + image[image.length - 1]._id + "/";
 
-
 		imgsec.appendChild(imginfo);
 		imgsec.appendChild(displayedimg);
 	});
