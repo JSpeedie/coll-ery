@@ -128,7 +128,7 @@ window.onload = function() {
 			'Thumbnail Image ID:'
 		let edit_collection_info_thumbnail_image_id_input =
 			document.createElement('input');
-		edit_collection_info_thumbnail_image_id_input.type = "number";
+		edit_collection_info_thumbnail_image_id_input.type = "text";
 		edit_collection_info_thumbnail_image_id_input.className =
 			"form_element edit_collection_info_thumbnail_image_id_input";
 		edit_collection_info_thumbnail_image_id_input.value =
