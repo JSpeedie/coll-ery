@@ -259,9 +259,6 @@ app.delete('/api/images/:id/', function (req, res, next) {
 
 /* Add new collection to gallery */
 app.post('/api/collections/', function (req, res, next) {
-	/* Get an ID for the new collection */
-	let newCollectionId = new CollectionId();
-
 	// TODO: translate content to a json array for storage
 	new_collection_images = req.body.images;
 	if (new_collection_images == null) {
@@ -271,15 +268,14 @@ app.post('/api/collections/', function (req, res, next) {
 	new_collection_thumbnail_image_id = req.body.collection_thumbnail_image_id;
 	if (!new_collection_thumbnail_image_id.trim()) {
 		new_collection_thumbnail_image_id = null;
-	/* If they did specify a thumbnail image id, convert to an int */
+	/* If they did specify a thumbnail image id, convert to a valid id */
 	} else {
 		new_collection_thumbnail_image_id =
-			parseInt(new_collection_thumbnail_image_id)
+			ObjectId(new_collection_thumbnail_image_id)
 	}
 
 	/* Create storage object */
 	let new_collection_obj = {
-		_id: newCollectionId._id,
 		/* req.body.x must have x match the element names in the form
 		 * in the HTML */
 		title: req.body.collection_title,
@@ -287,14 +283,42 @@ app.post('/api/collections/', function (req, res, next) {
 		thumbnail_image_id: new_collection_thumbnail_image_id,
 		images: new_collection_images
 	};
-	console.log("inserting new collection with id of " + newCollectionId._id + " which looks like:");
-	console.log(new_collection_obj);
-	/* Store object in database */
-	collections.insert(new_collection_obj, function(err, newDoc) {});
-	// Respond to requester
-	//res.json(newCollection);
 
-	return res.redirect('/add_collection.html');
+	try {
+		MongoClient.connect(mongoUrl, mongoOptions, function(err, client) {
+
+			const db = client.db('coll-ery');
+
+			let insertPromise = function() {
+				return new Promise((resolve, reject) => {
+					try {
+						let inserted = db.collection('collections').insertOne(new_collection_obj);
+						resolve(inserted);
+					/* Catch insertion errors */
+					} catch (err) {
+						reject(inserted);
+						console.log(err);
+					}
+				});
+			};
+
+			/* Define function for calling insert and waiting for result */
+			let callInsertPromise = async function() {
+				let result = await (insertPromise());
+				console.log("inserting new collection with id of " + result.insertedId);
+
+				return result;
+			}
+
+			/* Do necessary work after insert promise returns */
+			callInsertPromise().then(function(result) {
+				client.close();
+				res.json(new_collection_obj);
+			});
+		});
+	} catch (err) {
+		console.log(err);
+	}
 });
 
 
