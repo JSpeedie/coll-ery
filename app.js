@@ -24,11 +24,8 @@ app.use(function (req, res, next){
 
 /* Add new image to gallery */
 app.post('/api/images/', upload.single('image_file'), function (req, res, next) {
-	/* Get an ID for the new image */
-	let newImageId = new ImageId();
 	/* Create storage object */
 	let new_image_obj = {
-		_id: newImageId._id,
 		/* req.body.x must have x match the element names in the form
 		 * in the HTML */
 		title: req.body.image_title,
@@ -38,14 +35,42 @@ app.post('/api/images/', upload.single('image_file'), function (req, res, next) 
 		/* This must be req.file as opposed to req.body.x or something */
 		image: req.file
 		};
-	console.log("inserting new image with id of " + newImageId._id + " which looks like:");
-	console.log(new_image_obj);
-	/* Store object in database */
-	images.insert(new_image_obj, function(err, newDoc) {});
-	// Respond to requester
-	//res.json(newImage);
 
-	return res.json(new_image_obj);
+	try {
+		MongoClient.connect(mongoUrl, mongoOptions, function(err, client) {
+
+			const db = client.db('coll-ery');
+
+			let insertPromise = function() {
+				return new Promise((resolve, reject) => {
+					try {
+						let inserted = db.collection('images').insertOne(new_image_obj);
+						resolve(inserted);
+					/* Catch insertion errors */
+					} catch (err) {
+						reject(inserted);
+						console.log(err);
+					}
+				});
+			};
+
+			/* Define function for calling insert and waiting for result */
+			let callInsertPromise = async function() {
+				let result = await (insertPromise());
+				console.log("inserting new image with id of " + result.insertedId);
+
+				return result;
+			}
+
+			/* Do necessary work after insert promise returns */
+			callInsertPromise().then(function(result) {
+				client.close();
+				res.json(new_image_obj);
+			});
+		});
+	} catch (err) {
+		console.log(err);
+	}
 });
 
 /* Retrieve a given image from the gallery */
