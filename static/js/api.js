@@ -57,8 +57,8 @@ var api = (function(){
 		send("POST", "/api/images/", image_info, image_file, function(err, res){
 			// TODO: fix
 			//if (err) return notifyErrorListeners(err);
-			//callback(res);
 			notifyImageListeners();
+			callback(res);
 		});
 	}
 
@@ -67,8 +67,8 @@ var api = (function(){
 		send("DELETE", "/api/images/" + imageId + "/", null, function(err, res){
 			// TODO: fix
 			//if (err) return notifyErrorListeners(err);
-			//callback(res);
 			notifyImageListeners();
+			callback(res);
 		});
 	}
 
