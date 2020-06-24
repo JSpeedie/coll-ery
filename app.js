@@ -324,19 +324,48 @@ app.post('/api/collections/', function (req, res, next) {
 
 /* Retrieve given collection from gallery */
 app.get('/api/collections/:id/', function (req, res, next) {
+	/* Convert string in url to MongoDB Object ID */
 	let search = {
-		_id: parseInt(req.params.id)
+		_id: ObjectId(req.params.id)
 	};
 
-	collections.findOne(search, function(err, doc) {
-		/* If an collection of the given id exists, return that collection */
-		if (doc != null) {
-			res.json(doc);
-		} else {
-			console.error("ERROR: collection does not exist");
-			return res.status(404).end("Collection: " + req.params.id + " did not exist");
-		}
-	});
+	try {
+		MongoClient.connect(mongoUrl, mongoOptions, function(err, client) {
+
+			const db = client.db('coll-ery');
+
+			let searchPromise = function() {
+				return new Promise((resolve, reject) => {
+					// TODO: handle errors, avoid toArray()
+					db.collection('collections').find(search).toArray(function(err, data) {
+						if (err) {
+							console.log("ERROR: Could not find collection "
+								+ req.params.id);
+							reject(err)
+						} else {
+							console.log(data);
+							resolve(data[0]);
+						}
+					});
+				});
+			};
+
+			/* Define function for calling search and waiting for result */
+			let callSearchPromise = async function() {
+				let result = await (searchPromise());
+
+				return result;
+			}
+
+			/* Do necessary work after search promise returns */
+			callSearchPromise().then(function(result) {
+				client.close();
+				res.json(result);
+			});
+		});
+	} catch (err) {
+		console.log(err);
+	}
 });
 
 // TODO: require authorization for this
