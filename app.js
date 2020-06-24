@@ -414,28 +414,49 @@ app.get('/api/collections/', function (req, res, next) {
 /* Change the information attached to an collection in the gallery */
 app.patch('/api/collections/:id/', function (req, res, next) {
 	let search = {
-		_id: parseInt(req.params.id)
+		_id: ObjectId(req.params.id)
 	};
 
 	let newCollection = req.body;
 
-	collections.findOne(search, function(err, doc) {
-		if (doc != null) {
-			collections.update(search,
-				{$set: {title: newCollection.title,
-					    description: newCollection.description,
-					    thumbnail_image_id: newCollection.thumbnail_image_id,
-					    images: newCollection.images}},
-				{}, function(err, numReplaced) {
+	try {
+		MongoClient.connect(mongoUrl, mongoOptions, function(err, client) {
 
-				return res.json(doc);
+			const db = client.db('coll-ery');
+
+			let updatePromise = function() {
+				return new Promise((resolve, reject) => {
+					try {
+						let updated = db.collection('collections').findOneAndUpdate(search,
+							{$set: { title: newCollection.title,
+								description: newCollection.description,
+								thumbnail_image_id: ObjectId(newCollection.thumbnail_image_id),
+								images: newCollection.images }
+							});
+							resolve(updated);
+					/* Catch update errors */
+					} catch (err) {
+						reject(updated);
+						console.log(err);
+					}
+				});
+			};
+
+			/* Define function for calling update and waiting for result */
+			let callUpdatePromise = async function() {
+				let result = await (updatePromise());
+
+				return result;
+			}
+
+			/* Do necessary work after update promise returns */
+			callUpdatePromise().then(function(result) {
+				client.close();
 			});
-		} else {
-			console.error("ERROR: invalid argument");
-			return res.status(404).end("Collection:" + search._id + " received invalid argument");
-		}
-	});
-
+		});
+	} catch (err) {
+		console.log(err);
+	}
 });
 
 
