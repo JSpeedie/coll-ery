@@ -13,8 +13,18 @@ window.onload = function() {
 			return null;
 		}
 
+		let collection_title = document.getElementById("collection_title");
+		collection_title.innerHTML = collection.title;
+
+
 		if (collection.images.length == 0) {
-			console.log("This collection is empty");
+			console.log("This collection has no images... yet!");
+
+			let warning_message = document.createElement('div');
+			warning_message.className = "warning_message";
+			warning_message.innerHTML = "This collection has no images... yet!";
+
+			collection_container.appendChild(warning_message);
 		}
 
 		/* Go through every image in the collection and create a gallery item
