@@ -33,7 +33,8 @@ app.post('/api/images/', upload.single('image_file'), function (req, res, next) 
 		description: req.body.image_description,
 		author_name: req.body.image_author_name,
 		/* This must be req.file as opposed to req.body.x or something */
-		image: req.file
+		image: req.file,
+		uploaded_at: Date.now()
 		};
 
 	try {
@@ -182,7 +183,7 @@ app.get('/api/images/', function (req, res, next) {
 			let searchPromise = function() {
 				return new Promise((resolve, reject) => {
 					// TODO: handle errors, avoid toArray()
-					db.collection('images').find({}).sort({ _id: -1 }).toArray(function(err, data) {
+					db.collection('images').find({}).sort({ uploaded_at: 1 }).toArray(function(err, data) {
 						if (err) {
 							console.log("ERROR: Could not find images");
 							reject(err)
@@ -509,6 +510,6 @@ const http = require('http');
 const PORT = 3000;
 
 http.createServer(app).listen(PORT, function (err) {
-    if (err) console.log(err);
-    else console.log("HTTP server on http://localhost:%s", PORT);
+	if (err) console.log(err);
+	else console.log("HTTP server on http://localhost:%s", PORT);
 });
