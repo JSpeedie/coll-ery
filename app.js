@@ -282,7 +282,8 @@ app.post('/api/collections/', function (req, res, next) {
 		title: req.body.collection_title,
 		description: req.body.collection_description,
 		thumbnail_image_id: new_collection_thumbnail_image_id,
-		images: new_collection_images
+		images: new_collection_images,
+		created_at: Date.now()
 	};
 
 	try {
@@ -380,7 +381,7 @@ app.get('/api/collections/', function (req, res, next) {
 			let searchPromise = function() {
 				return new Promise((resolve, reject) => {
 					// TODO: handle errors, avoid toArray()
-					db.collection('collections').find({}).sort({ _id: -1 }).toArray(function(err, data) {
+					db.collection('collections').find({}).sort({ created_at: 1 }).toArray(function(err, data) {
 						if (err) {
 							console.log("ERROR: Could not find collections");
 							reject(err)
