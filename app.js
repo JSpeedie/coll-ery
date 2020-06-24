@@ -75,19 +75,48 @@ app.post('/api/images/', upload.single('image_file'), function (req, res, next) 
 
 /* Retrieve a given image from the gallery */
 app.get('/api/images/:id/', function (req, res, next) {
+	/* Convert string in url to MongoDB Object ID */
 	let search = {
-		_id: parseInt(req.params.id)
+		_id: ObjectId(req.params.id)
 	};
 
-	images.findOne(search, function(err, doc) {
-		/* If an image of the given id exists, return that image */
-		if (doc != null) {
-			return res.json(doc);
-		} else {
-			console.error("ERROR: image does not exist");
-			return res.status(404).end("Image: " + req.params.id + " did not exist");
-		}
-	});
+	try {
+		MongoClient.connect(mongoUrl, mongoOptions, function(err, client) {
+
+			const db = client.db('coll-ery');
+
+			let searchPromise = function() {
+				return new Promise((resolve, reject) => {
+					// TODO: handle errors, avoid toArray()
+					db.collection('images').find(search).toArray(function(err, data) {
+						if (err) {
+							console.log("ERROR: Could not find image "
+								+ req.params.id);
+							reject(err)
+						} else {
+							console.log(data);
+							resolve(data[0]);
+						}
+					});
+				});
+			};
+
+			/* Define function for calling search and waiting for result */
+			let callSearchPromise = async function() {
+				let result = await (searchPromise());
+
+				return result;
+			}
+
+			/* Do necessary work after search promise returns */
+			callSearchPromise().then(function(result) {
+				client.close();
+				res.json(result);
+			});
+		});
+	} catch (err) {
+		console.log(err);
+	}
 });
 
 /* Retrieve a given image's image file from the gallery */
