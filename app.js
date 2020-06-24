@@ -217,18 +217,42 @@ app.get('/api/images/', function (req, res, next) {
 /* Delete a given image from the gallery */
 app.delete('/api/images/:id/', function (req, res, next) {
 	let search = {
-		_id: parseInt(req.params.id)
+		_id: ObjectId(req.params.id)
 	};
 
-	images.findOne(search, function(err, doc) {
-		if (doc != null) {
-			images.remove(search, {}, function(err, numRem) {});
-			return res.json(doc);
-		} else {
-			console.error("ERROR: Could not delete image of that ID; image of that ID does not exist");
-			return res.status(404).end("Image: " + req.params.id + " did not exist");
-		}
-	});
+	try {
+		MongoClient.connect(mongoUrl, mongoOptions, function(err, client) {
+
+			const db = client.db('coll-ery');
+
+			let deletionPromise = function() {
+				return new Promise((resolve, reject) => {
+					try {
+						let deleted = db.collection('images').deleteOne(search);
+						resolve(deleted);
+					/* Catch deletion errors */
+					} catch (err) {
+						reject(deleted);
+						console.log(err);
+					}
+				});
+			};
+
+			/* Define function for calling deletion and waiting for result */
+			let callDeletionPromise = async function() {
+				let result = await (deletionPromise());
+
+				return result;
+			}
+
+			/* Do necessary work after deletion promise returns */
+			callDeletionPromise().then(function(result) {
+				client.close();
+			});
+		});
+	} catch (err) {
+		console.log(err);
+	}
 });
 
 
