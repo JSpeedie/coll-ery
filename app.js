@@ -371,9 +371,44 @@ app.get('/api/collections/:id/', function (req, res, next) {
 // TODO: require authorization for this
 // Retrieve all collections
 app.get('/api/collections/', function (req, res, next) {
-	collections.find({}).exec(function(err, data) {
-		return res.json(data);
-	});
+	try {
+		MongoClient.connect(mongoUrl, mongoOptions, function(err, client) {
+
+			const db = client.db('coll-ery');
+
+			let searchPromise = function() {
+				return new Promise((resolve, reject) => {
+					// TODO: handle errors, avoid toArray()
+					db.collection('collections').find({}).sort({ _id: -1 }).toArray(function(err, data) {
+						if (err) {
+							console.log("ERROR: Could not find collections");
+							reject(err)
+						} else {
+							resolve(data);
+						}
+					});
+				});
+			};
+
+			/* Define function for calling search and waiting for results */
+			let callSearchPromise = async function() {
+				let results = await (searchPromise());
+
+				return results;
+			}
+
+			/* Do necessary work after search promise returns */
+			callSearchPromise().then(function(results) {
+				client.close();
+				/* If there are any collections */
+				if (results != null) {
+					return res.json(results);
+				}
+			});
+		});
+	} catch (err) {
+		console.log(err);
+	}
 });
 
 /* Change the information attached to an collection in the gallery */
