@@ -6,6 +6,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 var multer = require('multer');
+const fs = require('fs');
 var upload = multer({dest: 'uploads/'});
 
 const mongo = require('mongodb');
@@ -277,11 +278,21 @@ app.delete('/api/images/:id/', function (req, res, next) {
 			let deletionPromise = function() {
 				return new Promise((resolve, reject) => {
 					try {
-						let deleted = db.collection('images').deleteOne(search);
-						resolve(deleted);
+						db.collection('images').find(search).toArray(function(err, data) {
+							if (err) {
+								console.log("ERROR: Could not find image");
+								reject(err)
+							} else {
+								/* Delete the image itself from storage */
+								fs.unlinkSync(data[0].image.path);
+								/* Delete the image data from the database */
+								let deleted = db.collection('images').deleteOne(search);
+								resolve(deleted);
+							}
+						});
 					/* Catch deletion errors */
 					} catch (err) {
-						reject(deleted);
+						reject(err);
 						console.log(err);
 					}
 				});
