@@ -2,7 +2,7 @@
   "name": "coll-ery",
   "version": "1.0.0",
   "description": "Collection based gallery",
-  "main": "app.js",
+  "main": "index.js",
   "directories": {
     "doc": "doc"
   },
@@ -10,11 +10,14 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "mongodb": "^3.5.9",
-    "multer": "^1.4.1"
+    "multer": "^1.4.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
   },
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --mode development --hot --history-api-fallback",
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -25,5 +28,18 @@
   "bugs": {
     "url": "https://github.com/JSpeedie/coll-ery.git/issues"
   },
-  "homepage": "https://github.com/JSpeedie/coll-ery/#readme"
+  "homepage": "https://github.com/JSpeedie/coll-ery/#readme",
+  "devDependencies": {
+    "@babel/core": "^7.10.3",
+    "@babel/preset-env": "^7.10.3",
+    "@babel/preset-react": "^7.10.1",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^3.6.0",
+    "html-webpack-plugin": "^4.3.0",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev": "^1.1.1",
+    "webpack-dev-server": "^3.11.0"
+  }
 }
