@@ -35,11 +35,11 @@
 	border: 0px;
 	border-bottom: 2px solid #548ca5;
 	background: transparent;
-	color: #111111;
 }
 
 .complex_form .form_element {
 	margin: 5px 10px 5px 10px;
+	color: #111111;
 }
 
 .complex_form .form_file_browse {
@@ -61,6 +61,6 @@
 
 .button:hover {
 	box-shadow: 0 0 5px 2px #548ca5;
-	color: #ffffff;
+	color: #989c9d;
 	cursor: pointer;
 }
