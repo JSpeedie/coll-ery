@@ -1,4 +1,5 @@
-#images_container, #collections_container, #collection_container{
+#images_container, #collections_container, #collection_container, .image_gallery, .collection_gallery{
+	width: 100%;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
