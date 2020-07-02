@@ -6,6 +6,7 @@ import PageCollectionEdit from './PageCollectionEdit';
 import PageCollectionView from './PageCollectionView';
 import PageError from './PageError';
 import PageGallery from './PageGallery';
+import PageImageEdit from './PageImageEdit';
 import PageImageView from './PageImageView';
 
 class App extends Component {
@@ -22,6 +23,7 @@ class App extends Component {
               <Route path='/collection/add' component={PageCollectionAdd} />
               <Route path='/collection/edit/:id' component={PageCollectionEdit} />
               <Route path='/collection/:id' component={PageCollectionView} />
+              <Route path='/image/edit/:id' component={PageImageEdit} />
               <Route path='/image/:id' component={PageImageView} />
               <Route component={PageError} />
             </Switch>
