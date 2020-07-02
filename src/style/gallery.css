@@ -1,4 +1,12 @@
-#images_container, #collections_container, #collection_container, .image_gallery, .collection_gallery{
+#images_container, #collections_container, #collection_container, .collection_gallery{
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+}
+
+.image_gallery_images {
 	width: 100%;
 	display: flex;
 	flex-direction: row;
