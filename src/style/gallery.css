@@ -45,6 +45,7 @@
 }
 
 .gallery_item_title_control {
+	text-decoration: none;
 	background: #111111;
 	color: #ffe6cc;
 	padding: 10px;
