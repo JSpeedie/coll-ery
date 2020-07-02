@@ -10,6 +10,19 @@ class GalleryItem extends Component{
 		this.previewImageId="previewImageId";
 		this.description="description";
 		this.title="title";
+		this.editItem = this.editItem.bind(this);
+		this.deleteItem = this.deleteItem.bind(this);
+	}
+
+	editItem() {
+		alert("edit item? [Functionality missing]")
+		// TODO: redirect to edit page
+	}
+
+	deleteItem() {
+		if (window.confirm("Are you sure you want to delete the image, \"" + this.props.title + "\"?")) {
+			// TODO: send delete request
+		}
 	}
 
 	render() {
@@ -27,7 +40,13 @@ class GalleryItem extends Component{
              </Link>
              <div className="gallery_item_title">{this.props.title}
                <div className="gallery_item_title_controls">
-                 <div className="gallery_item_title_control">X</div>
+                 <Link className="gallery_item_title_control" to=
+                   {this.props.imageId
+                     ? "/image/edit/" + this.props.imageId
+                     : "/collection/edit/" + this.props.collectionId}>
+                   E
+                 </Link>
+                 <div className="gallery_item_title_control" onClick={this.deleteItem}>X</div>
                </div>
              </div>
            </div>
@@ -36,11 +55,6 @@ class GalleryItem extends Component{
 			// 		api.deleteImage(images[i]._id, function() {});
 			// 	}
 			// };
-		  //
-			// let galleryitemtitlecontrol_edit = document.createElement('div');
-			// galleryitemtitlecontrol_edit.className = "gallery_item_title_control";
-			// galleryitemtitlecontrol_edit.innerHTML = "E";
-		  //
 			// galleryitemtitlecontrol_edit.onclick = function() {
 			// 	window.location.href =
 			// 		"/edit_collection.html?c=" + collections[i]._id;
