@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 
 import NavBar from './NavBar';
 
@@ -34,7 +33,7 @@ class PageImageEdit extends Component{
              <div id="image_section">
                <div className="view_image_container">
                  <div className="edit_image_preview">
-                   <img className="view_image_preview_image" src={"http://localhost:3000/img/" + this.state.image._id} height="400" />
+                   <img className="view_image_preview_image" src={"http://localhost:3000/api/img/" + this.state.image._id} height="400" />
                    <div className="view_image_info_div">
                      <div className="edit_image_info_title">
                        <p>

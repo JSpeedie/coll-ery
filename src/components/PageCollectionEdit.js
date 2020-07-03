@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import NavBar from './NavBar';
 
@@ -32,7 +32,7 @@ class PageCollectionEdit extends Component{
              <div id="collection_section">
                <div className="view_collection_container">
                  <div className="view_collection_preview">
-                   <img className="view_collection_preview_collection" src={"http://localhost:3000/images/" + this.state.collection.thumbnail_image_id} height="400" />
+                   <img className="view_collection_preview_collection" src={"http://localhost:3000/api/img/" + this.state.collection.thumbnail_image_id} height="400" />
                    <div className="view_collection_info_div">
                      <div className="edit_collection_info_title">
                        <p>
