@@ -10,18 +10,26 @@ class GalleryItem extends Component{
 		this.previewImageId="previewImageId";
 		this.description="description";
 		this.title="title";
-		this.editItem = this.editItem.bind(this);
 		this.deleteItem = this.deleteItem.bind(this);
-	}
-
-	editItem() {
-		alert("edit item? [Functionality missing]")
-		// TODO: redirect to edit page
 	}
 
 	deleteItem() {
 		if (window.confirm("Are you sure you want to delete the image, \"" + this.props.title + "\"?")) {
-			// TODO: send delete request
+			const requestOptions = {
+				method: 'DELETE'
+			};
+
+			if (this.props.imageId) {
+				fetch("http://localhost:3000/api/images/" + this.props.imageId, requestOptions)
+					.then((response) => {
+						return response.json();
+					}).catch(console.log);
+			} else {
+				fetch("http://localhost:3000/api/collections/" + this.props.collectionId, requestOptions)
+					.then((response) => {
+						return response.json();
+					}).catch(console.log);
+			}
 		}
 	}
 
