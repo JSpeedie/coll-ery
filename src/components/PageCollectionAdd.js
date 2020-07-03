@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 
 import NavBar from './NavBar';
 
@@ -11,7 +10,7 @@ class PageCollectionAdd extends Component{
 
 	render(){
 		return(
-	       <div className="Gallery">
+	       <div className="CollectionAdd">
              <header>
                  <a href="/" id="title">Gallery</a>
              </header>
