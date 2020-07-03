@@ -1,4 +1,4 @@
-#images_container, #collections_container, #collection_container, .collection_gallery{
+#images_container, #collections_container, #collection_container, .collection_gallery {
 	width: 100%;
 	display: flex;
 	flex-direction: row;

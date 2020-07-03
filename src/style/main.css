@@ -76,6 +76,6 @@ footer {
 	justify-content: center;
 }
 
-.Gallery {
+.Gallery, .CollectionView {
 	width: 85%;
 }
