@@ -83,3 +83,18 @@ footer {
 .ImageAdd, .CollectionAdd {
 	width: 75%;
 }
+
+.edit_image_container {
+	display: flex;
+	flex-direction: row;
+}
+
+.edit_image_preview_image {
+	margin: 0px;
+	padding: 0px;
+}
+
+.edit_image_edit_fields_div {
+	margin: 4%;
+	padding: 0px;
+}
