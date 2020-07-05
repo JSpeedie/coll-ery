@@ -55,10 +55,6 @@ class PageImageAdd extends Component{
 		fetch("http://localhost:3000/api/images/", {
 			mode: 'no-cors',
 			method: "POST",
-			// headers: {
-			// 	"Content-Type": "multipart/form-data",
-			// 	"type": "formData"
-			// },
 			body: formData
 		})
 		// }).then(response => response.json()).then(response => {
@@ -105,7 +101,7 @@ class PageImageAdd extends Component{
                <input type="text" id="upload_image_description" className="form_element" placeholder="Enter a description" name="image_description" onChange={this.handleDescriptionChange} required="" />
                <input type="file" id="upload_image_file" className="form_file_browse" name="image_file" accept="image/png, image/jpeg" onChange={this.handleImageFileChange} required />
                <input type="date" id="upload_image_date_taken" className="form_element" name="image_date_taken" onChange={this.handleDateTakenChange} required="" />
-               <button type="submit" className="form_submit button" onClick={this.uploadImageFormSubmit}>Upload your image</button>
+               <button type="submit" className="form_submit button form_button" onClick={this.uploadImageFormSubmit}>Upload your image</button>
              </form>
 
              <br/>
