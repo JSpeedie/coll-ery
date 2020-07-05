@@ -47,20 +47,23 @@
 	font-size: 20px;
 }
 
+.form_button {
+	margin: 20px 10px 10px 10px;
+}
+
 .button {
 	/* Speed of transition to .button:hover */
-	transition-duration: 0.3s;
-	margin: 20px 10px 10px 10px;
+	transition-duration: 0.2s;
 	padding: 10px;
 	font-size: 20px;
 	background: transparent;
 	border-radius: 5px;
 	border: 2px solid #548ca5;
-	color: #989c9d;
+	color: #111111;
 }
 
 .button:hover {
 	box-shadow: 0 0 5px 2px #548ca5;
-	color: #989c9d;
+	color: #111111;
 	cursor: pointer;
 }
