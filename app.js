@@ -6,6 +6,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 var multer = require('multer');
+const sharp = require('sharp');
 const fs = require('fs');
 var upload = multer({dest: 'uploads/'});
 
@@ -34,6 +35,20 @@ app.use(function (req, res, next){
 
 /* Add new image to gallery */
 app.post('/api/images/', upload.single('image_file'), function (req, res, next) {
+	/* Create a thumnbnail of the image */
+	try {
+		sharp(req.file.path).resize(600, 600, {
+			kernel: sharp.kernel.nearest,
+			fit: 'outside' })
+			.toFile('uploads/thumbnail-' + req.file.filename, (err, resizeImage) => {
+			if (err) {
+				console.log(err);
+			}
+		})
+	} catch (error) {
+		console.error(error);
+	}
+
 	/* Create storage object */
 	let new_image_obj = {
 		/* req.body.x must have x match the element names in the form
@@ -45,7 +60,7 @@ app.post('/api/images/', upload.single('image_file'), function (req, res, next) 
 		/* This must be req.file as opposed to req.body.x or something */
 		image: req.file,
 		uploaded_at: Date.now()
-		};
+	};
 
 	try {
 		MongoClient.connect(mongoUrl, mongoOptions, function(err, client) {
