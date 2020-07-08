@@ -14,6 +14,26 @@ class PageCollectionEdit extends Component{
 			thumbnail_image_id: 0,
 			images: []
 		}
+		this.handleTitleChange = this.handleTitleChange.bind(this);
+		this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
+		// this.handleImagesChange = this.handleImagesChange.bind(this);
+		this.patchCollection = this.patchCollection.bind(this);
+	}
+
+	handleTitleChange(e) {
+		this.setState({ title: e.target.value });
+	}
+
+	handleThumbnailIdChange(e) {
+		this.setState({ thumbnail_image_id: e.target.value });
+	}
+
+	handleDescriptionChange(e) {
+		this.setState({ description: e.target.value });
+	}
+
+	handleImagesChange(e) {
+		this.setState({ images: JSON.parse(e.target.value) });
 	}
 
 	patchCollection() {
