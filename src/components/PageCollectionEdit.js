@@ -8,11 +8,11 @@ class PageCollectionEdit extends Component{
 	constructor(props) {
 		super(props);
 		this.state = {
-			collection: {
-				title: "title",
-				author_name: "author_name",
-				thumbnail_image_id: 0,
-			}
+			_id: 0,
+			title: "title",
+			description: "description",
+			thumbnail_image_id: 0,
+			images: []
 		}
 	}
 
