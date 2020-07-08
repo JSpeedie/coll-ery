@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import NavBar from './NavBar';
+import ImageChooser from './ImageChooser';
 
 class PageCollectionEdit extends Component{
 
