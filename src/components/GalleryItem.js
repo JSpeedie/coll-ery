@@ -41,7 +41,7 @@ class GalleryItem extends Component{
                  ? "/image/" + this.props.imageId
                  : "/collection/" + this.props.collectionId}>
                <img className="gallery_item_preview_image" src=
-                 {"http://localhost:3000/api/img/" + this.props.previewImageId + "/"} height="400"/>
+                 {"http://localhost:3000/api/img/thumbnail/" + this.props.previewImageId + "/"} height="400"/>
                <div className="gallery_item_info_div">
                  <p className="gallery_item_info">{this.props.description}</p>
                </div>
