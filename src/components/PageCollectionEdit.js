@@ -16,6 +16,22 @@ class PageCollectionEdit extends Component{
 		}
 	}
 
+	patchCollection() {
+		fetch("http://localhost:3000/api/collections/" + this.state._id + "/", {
+			method: 'PATCH',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				_id: this.state._id,
+				title: this.state.title,
+				description: this.state.description,
+				thumbnail_image_id: this.state.thumbnail_image_id,
+				images: this.state.images
+			})
+		})
+	}
 	render(){
 		return(
 	       <div className="CollectionEdit">
