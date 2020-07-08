@@ -197,6 +197,82 @@ app.get('/api/img/:id/', function (req, res, next) {
 	}
 });
 
+/* Retrieve a given image's image file from the gallery */
+app.get('/api/img/thumbnail/:id/', function (req, res, next) {
+	let search = {
+		_id: ObjectId(req.params.id)
+	};
+
+	try {
+		MongoClient.connect(mongoUrl, mongoOptions, function(err, client) {
+
+			const db = client.db('coll-ery');
+
+			let searchPromise = function() {
+				return new Promise((resolve, reject) => {
+					// TODO: handle errors, avoid toArray()
+					db.collection('images').find(search).toArray(function(err, data) {
+						if (err) {
+							console.log("ERROR: Could not find image "
+								+ req.params.id);
+							reject(err)
+						} else {
+							resolve(data[0]);
+						}
+					});
+				});
+			};
+
+			/* Define function for calling search and waiting for result */
+			let callSearchPromise = async function() {
+				let result = await (searchPromise());
+
+				return result;
+			}
+
+			/* Do necessary work after search promise returns */
+			callSearchPromise().then(function(result) {
+				client.close();
+				/* If an image of the given id exists, return that image */
+				if (result != null) {
+					/* result.x must match name in object inserted into Datastore */
+					res.setHeader('Content-Type', result.image.mimetype);
+					var thumbnailImagePath = 
+						result.image.destination + "thumbnail-"
+						+ result.image.filename;
+
+					if (fs.existsSync(thumbnailImagePath)) {
+						res.sendFile(thumbnailImagePath, { root: __dirname });
+					/* Image exists, but thumbnail does not */
+					} else {
+						/* Create a thumnbnail of the image */
+						try {
+							sharp(result.image.path).resize(600, 600, {
+								kernel: sharp.kernel.nearest,
+								fit: 'outside' })
+								.toFile('uploads/thumbnail-' + result.image.filename, (err, resizeImage) => {
+								if (err) {
+									console.log(err);
+								} else {
+									/* Return the newly made thumbnail image */
+									res.sendFile(thumbnailImagePath, { root: __dirname });
+								}
+							})
+						} catch (error) {
+							console.error(error);
+						}
+					}
+				} else {
+					console.error("ERROR: image " + req.params.id + " does not exist");
+					return res.status(404).end("Image: " + req.params.id + " did not exist");
+				}
+			});
+		});
+	} catch (err) {
+		console.log(err);
+	}
+});
+
 // TODO: require authorization for this
 /* Retrieve all images from the gallery */
 app.get('/api/images/', function (req, res, next) {
