@@ -106,7 +106,13 @@ class PageCollectionEdit extends Component{
 		/* Get collection info */
 		fetch('http://localhost:3000/api/collections/' + this.props.match.params.id)
 			.then(res => res.json()).then((data) => {
-				this.setState({ collection: data });
+				this.setState({
+					_id: data._id,
+					title: data.title,
+					description: data.description,
+					thumbnail_image_id: data.thumbnail_image_id,
+					images: data.images,
+				});
 			}).catch(console.log);
 	}
 }
