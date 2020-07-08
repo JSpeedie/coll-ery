@@ -385,6 +385,8 @@ app.delete('/api/images/:id/', function (req, res, next) {
 							} else {
 								/* Delete the image itself from storage */
 								fs.unlinkSync(data[0].image.path);
+								/* Delete the thumbnail of image from storage */
+								fs.unlinkSync(data[0].image.destination + "thumbnail-" + data[0].image.filename);
 								/* Delete the image data from the database */
 								let deleted = db.collection('images').deleteOne(search);
 								resolve(deleted);
