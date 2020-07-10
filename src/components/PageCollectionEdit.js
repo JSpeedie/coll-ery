@@ -13,11 +13,13 @@ class PageCollectionEdit extends Component{
 			title: "title",
 			description: "description",
 			thumbnail_image_id: 0,
-			images: []
+			selected_images: [],
 		}
+
 		this.handleTitleChange = this.handleTitleChange.bind(this);
 		this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
-		// this.handleImagesChange = this.handleImagesChange.bind(this);
+		this.handleChooserImagesChange = this.handleChooserImagesChange.bind(this);
+
 		this.patchCollection = this.patchCollection.bind(this);
 	}
 
@@ -33,8 +35,11 @@ class PageCollectionEdit extends Component{
 		this.setState({ description: e.target.value });
 	}
 
-	handleImagesChange(e) {
-		this.setState({ images: JSON.parse(e.target.value) });
+	handleChooserImagesChange(imgs) {
+		this.setState({ selected_images: imgs }, function() {
+			console.log("new selection is");
+			console.log(this.state.selected_images);
+		});
 	}
 
 	patchCollection() {
@@ -49,7 +54,7 @@ class PageCollectionEdit extends Component{
 				title: this.state.title,
 				description: this.state.description,
 				thumbnail_image_id: this.state.thumbnail_image_id,
-				images: this.state.images
+				images: [...this.state.selected_images]
 			})
 		})
 	}
@@ -103,18 +108,20 @@ class PageCollectionEdit extends Component{
                    </div>
                    <input type="text"
                           className="form_element edit_collection_info_images_input"
-                          value={this.state.images}
-                            onChange={this.handleImagesChange}/>
+                          value={this.state.selected_images}
+                          onChange={() => {}}/>
                    <br/>
-                   <button className="edit_collection_info_save button">
-                     Save
-                   </button>
                    <button className="edit_collection_info_add_images button">
                      Add Images
                    </button>
                  </div>
                </div>
-               <ImageChooser collectionId={this.props.match.params.id} />
+               <ImageChooser collectionId={this.props.match.params.id}
+                             onSelectionChange={this.handleChooserImagesChange}/>
+              <button className="edit_collection_info_save button"
+                      onClick={this.patchCollection}>
+                Save
+              </button>
              </div>
 
              <br/>
@@ -152,7 +159,7 @@ class PageCollectionEdit extends Component{
 					title: data.title,
 					description: data.description,
 					thumbnail_image_id: data.thumbnail_image_id,
-					images: data.images,
+					selected_images: data.images,
 				});
 			}).catch(console.log);
 	}
