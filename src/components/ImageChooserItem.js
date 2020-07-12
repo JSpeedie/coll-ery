@@ -23,6 +23,14 @@ class ImageChooserItem extends Component{
                  </p>
                </div>
                : "" }
+               {this.props.isSelected
+               ?
+               <div className="image_chooser_item_info_div">
+                 <p className="image_chooser_item_info">
+                   Selected!
+                 </p>
+               </div>
+               : "" }
              </div>
              <div className="image_chooser_item_title">
                {this.props.title}
