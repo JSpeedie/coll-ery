@@ -8,6 +8,7 @@ import maincss from "../style/main.css";
 import gallerycss from "../style/gallery.css";
 import formcss from "../style/form.css";
 import viewimagecss from "../style/viewimage.css";
+import uploadimagecss from "../style/upload_image.css";
 
 ReactDOM.render(
     <BrowserRouter>
