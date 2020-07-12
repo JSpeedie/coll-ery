@@ -52,15 +52,23 @@ class ImageGallery extends Component{
 			fetch('http://localhost:3000/api/collections/' + this.props.collectionId)
 				.then(res => res.json()).then((data) => {
 					let imageIds = data.images;
+					this.setState(prevState => ({
+						images: new Array(imageIds.length)
+					}), () => {
+						for (let i = 0; i < imageIds.length; i++) {
+							fetch('http://localhost:3000/api/images/' + imageIds[i])
+								.then(res => res.json()).then((img) => {
+									this.setState(update(this.state, {
+										images: {
+											[i]: {
+												$set: img
+											}
+										}
+									}))
+								}).catch(console.log);
+						}
+					})
 
-					for (let i = 0; i < imageIds.length; i++) {
-						fetch('http://localhost:3000/api/images/' + imageIds[i])
-							.then(res => res.json()).then((data) => {
-								this.setState(prevState => ({
-									images: [...prevState.images, data]
-								}))
-							}).catch(console.log);
-					}
 				}).catch(console.log);
 		} else {
 			fetch('http://localhost:3000/api/images')
