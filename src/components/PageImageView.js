@@ -23,6 +23,7 @@ class PageImageView extends Component {
 			nextImageId: -1
 		}
 	}
+
 	renderViewPrevImage = () => {
 		if (this.props.match.params.collectionId) {
 			if (this.state.prevImageId !== -1) {

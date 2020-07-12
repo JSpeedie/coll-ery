@@ -4,7 +4,6 @@ import update from 'react-addons-update';
 import GalleryItem from './GalleryItem';
 import GalleryItemImage from './GalleryItemImage';
 
-
 class ImageGallery extends Component{
 
 	constructor(props) {
