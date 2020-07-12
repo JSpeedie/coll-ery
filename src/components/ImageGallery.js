@@ -14,6 +14,7 @@ class ImageGallery extends Component{
 			sliceEnd: 10
 		}
 		this.increaseSlice = this.increaseSlice.bind(this);
+		this.maxSlice = this.maxSlice.bind(this);
 	}
 
 	increaseSlice() {
@@ -22,6 +23,12 @@ class ImageGallery extends Component{
 				sliceEnd: prevState.sliceEnd + 10
 			}));
 		}
+	}
+
+	maxSlice() {
+		this.setState({
+			sliceEnd: this.state.images.length
+		})
 	}
 
 	render() {
