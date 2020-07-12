@@ -1,12 +1,12 @@
-#image_section {
+#uploaded_img_section {
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
 	text-align: center;
 }
 
-#displayed_image {
-	max-height: 500;
+.displayed_image {
+	max-height: 400;
 	padding: 2%;
 	object-fit: contain;
 }
