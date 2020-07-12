@@ -4,10 +4,16 @@ html {
 
 #image_section {
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
+	align-items: center;
 	flex-direction: row;
 	padding: 0px;
 	margin: 0px;
+	max-width: 100%;
+}
+
+a.view_prev_image {
+	cursor: pointer;
 }
 
 .view_prev_image {
@@ -19,6 +25,7 @@ html {
 	color: white;
 	max-width: 7.5%;
 	min-width: 7.5%;
+	height: 100%;
 }
 
 #image_container {
@@ -29,6 +36,7 @@ html {
 }
 
 .view_next_image {
+	cursor: pointer;
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
@@ -37,6 +45,11 @@ html {
 	color: white;
 	max-width: 7.5%;
 	min-width: 7.5%;
+	height: 100%;
+}
+
+a.view_next_image {
+	cursor: pointer;
 }
 
 .view_image_container {
