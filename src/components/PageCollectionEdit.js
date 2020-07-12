@@ -18,6 +18,7 @@ class PageCollectionEdit extends Component{
 
 		this.handleTitleChange = this.handleTitleChange.bind(this);
 		this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
+		this.handleThumbnailIdChange = this.handleThumbnailIdChange.bind(this);
 		this.handleChooserImagesChange = this.handleChooserImagesChange.bind(this);
 
 		this.patchCollection = this.patchCollection.bind(this);
@@ -37,7 +38,6 @@ class PageCollectionEdit extends Component{
 
 	handleChooserImagesChange(imgs) {
 		this.setState({ selected_images: imgs }, function() {
-			console.log("new selection is");
 			console.log(this.state.selected_images);
 		});
 	}
@@ -58,9 +58,10 @@ class PageCollectionEdit extends Component{
 			})
 		})
 	}
+
 	render(){
 		return(
-	       <div className="CollectionEdit">
+           <div className="CollectionEdit">
              <header>
                  <a href="/" id="title">Gallery</a>
              </header>
@@ -68,7 +69,10 @@ class PageCollectionEdit extends Component{
              <NavBar />
 
              <br/>
-             <h2>{this.state.title}</h2>
+               <Link className="hide_link"
+                     to={"/collection/" + this.state._id}>
+                 <h2>{this.state.title}</h2>
+               </Link>
              <br/>
 
              <div id="collection_section">
@@ -106,10 +110,6 @@ class PageCollectionEdit extends Component{
                             value={this.state.thumbnail_image_id}
                             onChange={this.handleThumbnailIdChange}/>
                    </div>
-                   <input type="text"
-                          className="form_element edit_collection_info_images_input"
-                          value={this.state.selected_images}
-                          onChange={() => {}}/>
                    <br/>
                    <button className="edit_collection_info_add_images button">
                      Add Images
