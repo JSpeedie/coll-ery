@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import NavBar from './NavBar';
 
-class PageImageAdd extends Component{
+class PageImageAdd extends Component {
 
 	constructor(props) {
 		super(props);
@@ -12,11 +12,13 @@ class PageImageAdd extends Component{
 			author_name: "author_name",
 			date_taken: "date_taken",
 		}
+
 		this.handleTitleChange = this.handleTitleChange.bind(this);
 		this.handleAuthorNameChange = this.handleAuthorNameChange.bind(this);
 		this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
 		this.handleImageFileChange = this.handleImageFileChange.bind(this);
 		this.handleDateTakenChange = this.handleDateTakenChange.bind(this);
+
 		this.uploadImageFormSubmit = this.uploadImageFormSubmit.bind(this);
 	}
 
@@ -85,23 +87,59 @@ class PageImageAdd extends Component{
 		// })
 	}
 
-	render(){
+	render() {
 		return(
-	       <div className="ImageAdd">
+           <div className="ImageAdd">
              <header>
                  <a href="/" id="title">Gallery</a>
              </header>
 
              <NavBar />
 
-             <form className="complex_form" id="upload_image_form" action="/api/images/" method="POST" encType="multipart/form-data">
+             <form className="complex_form"
+                   id="upload_image_form"
+                   action="/api/images/"
+                   method="POST" encType="multipart/form-data">
                <div className="form_title">Upload an image</div>
-               <input type="text" id="upload_image_title" className="form_element" placeholder="Enter a title for the image" name="image_title" onChange={this.handleTitleChange}required="" />
-               <input type="text" id="upload_image_author" className="form_element" placeholder="Enter your full name" name="image_author_name" onChange={this.handleAuthorNameChange} required="" />
-               <input type="text" id="upload_image_description" className="form_element" placeholder="Enter a description" name="image_description" onChange={this.handleDescriptionChange} required="" />
-               <input type="file" id="upload_image_file" className="form_file_browse" name="image_file" accept="image/png, image/jpeg" onChange={this.handleImageFileChange} required />
-               <input type="date" id="upload_image_date_taken" className="form_element" name="image_date_taken" onChange={this.handleDateTakenChange} required="" />
-               <button type="submit" className="form_submit button form_button" onClick={this.uploadImageFormSubmit}>Upload your image</button>
+               <input type="text"
+                      id="upload_image_title"
+                      className="form_element"
+                      placeholder="Enter a title for the image"
+                      name="image_title"
+                      onChange={this.handleTitleChange}
+                      required />
+               <input type="text"
+                      id="upload_image_author"
+                      className="form_element"
+                      placeholder="Enter your full name"
+                      name="image_author_name"
+                      onChange={this.handleAuthorNameChange}
+                      required />
+               <input type="text"
+                      id="upload_image_description"
+                      className="form_element"
+                      placeholder="Enter a description"
+                      name="image_description"
+                      onChange={this.handleDescriptionChange}
+                      required />
+               <input type="file"
+                      id="upload_image_file"
+                      className="form_file_browse"
+                      name="image_file"
+                      accept="image/png, image/jpeg"
+                      onChange={this.handleImageFileChange}
+                      required />
+               <input type="date"
+                      id="upload_image_date_taken"
+                      className="form_element"
+                      name="image_date_taken"
+                      onChange={this.handleDateTakenChange}
+                      required />
+               <button type="submit"
+                       className="form_submit button form_button"
+                       onClick={this.uploadImageFormSubmit}>
+                 Upload your image
+               </button>
              </form>
 
              <br/>
