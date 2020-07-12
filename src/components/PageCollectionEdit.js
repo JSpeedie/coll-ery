@@ -97,10 +97,10 @@ class PageCollectionEdit extends Component{
                      <p>
                        Description:
                      </p>
-                     <input type="text"
-                            className="form_element edit_collection_info_description_input"
-                            value={this.state.description}
-                            onChange={this.handleDescriptionChange}/>
+                     <textarea type="text"
+                               className="form_element edit_collection_info_description_input"
+                               value={this.state.description}
+                               onChange={this.handleDescriptionChange}></textarea>
                    </div>
                    <div className="edit_collection_info_thumbnail_image_id">
                      <p>
@@ -136,6 +136,9 @@ class PageCollectionEdit extends Component{
                    </button>
                  </div>
                </div>
+               <br/>
+               <br/>
+               <br/>
                {this.state.showThumbnailImageChooser
                ?
                <SingleImageChooser selectedImage={this.state.thumbnail_image_id}
