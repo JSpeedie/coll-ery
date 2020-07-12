@@ -11,6 +11,8 @@ class PageImageAdd extends Component {
 			description: "description",
 			author_name: "author_name",
 			date_taken: "date_taken",
+			showUpload: false,
+			uploadedImage: null,
 		}
 
 		this.handleTitleChange = this.handleTitleChange.bind(this);
@@ -55,36 +57,20 @@ class PageImageAdd extends Component {
 		formData.append("image_file", this.state.image);
 
 		fetch("http://localhost:3000/api/images/", {
-			mode: 'no-cors',
 			method: "POST",
 			body: formData
+		}).then((response) => {
+			if (response.status !== 200) {
+				return;
+			} else {
+				response.json().then((resp) => {
+					this.setState({
+						uploadedImage: resp,
+						showUpload: true
+					});
+				})
+			}
 		})
-		// }).then(response => response.json()).then(response => {
-			// TODO: make use of response here
-			//
-			// let image = JSON.parse(request.responseText);
-			// // TODO: some sort of success feedback
-			// let imgsec = document.getElementById("image_section");
-
-			// if (image == null) {
-			// 	imgsec.innerHTML = "";
-			// 	return null;
-			// }
-			// document.getElementById("image_section").innerHTML = '';
-			//
-			// var imginfo = document.createElement('span');
-			// imginfo.className = "title";
-			// imginfo.innerHTML = "\"" + image.title + "\", by "
-			// 	+ image.author_name + ". Taken on " + " " + image.date_taken
-			// 	+ ". \"" + image.description + "\"";
-			/* Create the img display */
-			// var displayedimg = document.createElement('img');
-			// displayedimg.id = "displayed_image";
-			// displayedimg.src = "/api/img/" + image._id + "/";
-
-			// imgsec.appendChild(imginfo);
-			// imgsec.appendChild(displayedimg);
-		// })
 	}
 
 	render() {
@@ -142,16 +128,20 @@ class PageImageAdd extends Component {
                </button>
              </form>
 
-             <br/>
-             <br/>
-             <br/>
-             <br/>
-             <br/>
-             <br/>
-             <br/>
-             <br/>
-             <br/>
-             <br/>
+             {this.state.showUpload
+             ?
+             <div id="uploaded_img_section">
+               <img className="displayed_image"
+                    src={"http://localhost:3000/api/img/" + this.state.uploadedImage._id + "/"}/>
+               <div className="view_image_preview_info">
+                 {"\"" + this.state.uploadedImage.title + "\", by "
+                   + this.state.uploadedImage.author_name + ". Taken on "
+                   + this.state.uploadedImage.date_taken + ". Description \""
+                   + this.state.uploadedImage.description + "\"."}
+               </div>
+             </div>
+             : "" }
+
              <br/>
              <br/>
              <br/>
