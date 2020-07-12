@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import update from 'react-addons-update';
+
 import GalleryItem from './GalleryItem';
+import GalleryItemImage from './GalleryItemImage';
+
 
 class ImageGallery extends Component{
 
@@ -22,23 +26,31 @@ class ImageGallery extends Component{
 	}
 
 	render() {
+        const galleryImages = this.state.images.slice(this.state.sliceStart, this.state.sliceEnd).sort().map((img) => 
+              <GalleryItemImage key={img._id}
+                                collectionId={this.props.collectionId}
+                                imageId={img._id}
+                                previewImageId={img._id}
+                                description={img.description}
+                                title={img.title}/>
+		)
 		return(
           <div className="image_gallery">
             <div className="image_gallery_images">
-              {this.state.images.slice(this.state.sliceStart, this.state.sliceEnd).map((img) => 
-                  <GalleryItem key={img._id}
-                               imageId={img._id}
-                               previewImageId={img._id}
-                               description={img.description}
-                               title={img.title}/>)
-              }
+            {galleryImages }
             </div>
             {(this.state.sliceEnd <= this.state.images.length)
-              ? 
+              ?
                 <div className="image_gallery_lower_controls">
                   <button className="image_gallery_controls_button" onClick={this.increaseSlice}>
                     Load more
                   </button>
+                  <button className="image_gallery_controls_button" onClick={this.maxSlice}>
+                    Load All
+                  </button>
+                  <p>
+                    {this.state.sliceEnd - this.state.sliceStart}/{this.state.images.length}
+                  </p>
                 </div>
               : ""}
           </div>
