@@ -169,3 +169,13 @@ footer {
 	margin: 10px;
 	color: #ffffff;
 }
+
+.collection_view_controls {
+	display: flex;
+	flex-direction: row;
+}
+
+.hide_link {
+	text-decoration: none;
+	color: #111111;
+}
