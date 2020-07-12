@@ -15,6 +15,9 @@ html {
 
 a.view_prev_image {
 	cursor: pointer;
+	font-size: 125px;
+	font-weight: 100;
+	transform: scale(1, 1.25);
 }
 
 .view_prev_image {
@@ -36,8 +39,14 @@ a.view_prev_image {
 	width: 85%;
 }
 
-.view_next_image {
+a.view_next_image {
 	cursor: pointer;
+	font-size: 125px;
+	font-weight: 100;
+	transform: scale(1, 1.25);
+}
+
+.view_next_image {
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
@@ -46,11 +55,7 @@ a.view_prev_image {
 	color: white;
 	max-width: 7.5%;
 	min-width: 7.5%;
-	height: 100%;
-}
-
-a.view_next_image {
-	cursor: pointer;
+	max-height: 100vh;
 }
 
 .view_image_container {

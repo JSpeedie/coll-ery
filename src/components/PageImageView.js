@@ -34,7 +34,7 @@ class PageImageView extends Component {
 							this.loadPageInfo(this.state.prevImageId, this.state.collection._id)
 						}
                   }}>
-                    view_prev_image
+                    &#8249;
                   </a>
 				);
 			} else {
@@ -49,14 +49,14 @@ class PageImageView extends Component {
 		if (this.props.match.params.collectionId) {
 			if (this.state.nextImageId !== -1) {
 				return (
-                  <div className="view_next_image hide_link"
+                  <a className="view_next_image hide_link"
                        onClick={ () => {
 						if (this.state.nextImageId !== -1) {
 							this.loadPageInfo(this.state.nextImageId, this.state.collection._id)
 						}
                   }}>
-                    view_next_image
-                  </div>
+					&#8250;
+                  </a>
 				);
 			} else {
 				return (
