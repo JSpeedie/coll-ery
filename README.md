@@ -1,2 +1,2 @@
 # coll-ery
-A collection-focused gallery website
+A full M.E.R.N. stack collection-focused gallery website
