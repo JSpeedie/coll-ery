@@ -23,10 +23,11 @@ class App extends Component {
               <Route path='/' component={PageGallery} exact />
               <Route path='/collection/add' component={PageCollectionAdd} />
               <Route path='/collection/edit/:id' component={PageCollectionEdit} />
-              <Route path='/collection/:id' component={PageCollectionView} />
+              <Route path='/collection/:id' component={PageCollectionView} exact />
               <Route path='/image/add' component={PageImageAdd} />
               <Route path='/image/edit/:id' component={PageImageEdit} />
               <Route path='/image/:id' component={PageImageView} />
+              <Route path='/collection/:collectionId/:id' component={PageImageView} exact />
               <Route component={PageError} />
             </Switch>
           </div>

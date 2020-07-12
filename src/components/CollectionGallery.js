@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GalleryItem from './GalleryItem';
 
-class CollectionGallery extends Component{
+class CollectionGallery extends Component {
 
 	constructor(props) {
 		super(props);
