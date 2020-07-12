@@ -18,6 +18,7 @@ a.view_prev_image {
 	font-size: 125px;
 	font-weight: 100;
 	transform: scale(1, 1.25);
+	user-select: none;
 }
 
 .view_prev_image {
@@ -56,6 +57,7 @@ a.view_next_image {
 	max-width: 7.5%;
 	min-width: 7.5%;
 	max-height: 100vh;
+	user-select: none;
 }
 
 .view_image_container {
