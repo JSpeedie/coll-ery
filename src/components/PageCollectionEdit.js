@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import NavBar from './NavBar';
 import ImageChooser from './ImageChooser';
+import SingleImageChooser from './SingleImageChooser';
 
 class PageCollectionEdit extends Component{
 
@@ -14,11 +15,13 @@ class PageCollectionEdit extends Component{
 			description: "description",
 			thumbnail_image_id: 0,
 			selected_images: [],
+			showThumbnailImageChooser: false,
+			showImagesImageChooser: false
 		}
 
 		this.handleTitleChange = this.handleTitleChange.bind(this);
 		this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
-		this.handleThumbnailIdChange = this.handleThumbnailIdChange.bind(this);
+		this.handleThumbnailChooserImagesChange = this.handleThumbnailChooserImagesChange.bind(this);
 		this.handleChooserImagesChange = this.handleChooserImagesChange.bind(this);
 
 		this.patchCollection = this.patchCollection.bind(this);
@@ -28,8 +31,8 @@ class PageCollectionEdit extends Component{
 		this.setState({ title: e.target.value });
 	}
 
-	handleThumbnailIdChange(e) {
-		this.setState({ thumbnail_image_id: e.target.value });
+	handleThumbnailChooserImagesChange(img) {
+		this.setState({ thumbnail_image_id: img });
 	}
 
 	handleDescriptionChange(e) {
@@ -37,9 +40,7 @@ class PageCollectionEdit extends Component{
 	}
 
 	handleChooserImagesChange(imgs) {
-		this.setState({ selected_images: imgs }, function() {
-			console.log(this.state.selected_images);
-		});
+		this.setState({ selected_images: imgs });
 	}
 
 	patchCollection() {
@@ -103,25 +104,48 @@ class PageCollectionEdit extends Component{
                    </div>
                    <div className="edit_collection_info_thumbnail_image_id">
                      <p>
-                       Thumbnail Image ID:
+                       Thumbnail Image:
                      </p>
-                     <input type="text"
-                            className="form_element edit_collection_info_thumbnail_image_id_input"
-                            value={this.state.thumbnail_image_id}
-                            onChange={this.handleThumbnailIdChange}/>
+                     <button className="edit_collection_info_edit_thumbnail_image button"
+                             onClick={() => {
+								this.setState(prevState => ({
+									showThumbnailImageChooser: !prevState.showThumbnailImageChooser
+								}));
+                             }}>
+                       Change Thumbnail Image
+                     </button>
                    </div>
-                   <br/>
-                   <button className="edit_collection_info_add_images button">
-                     Add Images
+                   <div className="edit_collection_info_images">
+                     <p>
+                       Collection Images:
+                     </p>
+                     <button className="edit_collection_info_edit_images button"
+                             onClick={() => {
+								this.setState(prevState => ({
+									showImagesImageChooser: !prevState.showImagesImageChooser
+								}));
+                             }}>
+                       Change Images
+                     </button>
+                   </div>
+                   <br />
+                   <br />
+                   <button className="edit_collection_info_save button"
+                           onClick={this.patchCollection}>
+                     Save
                    </button>
                  </div>
                </div>
+               {this.state.showThumbnailImageChooser
+               ?
+               <SingleImageChooser selectedImage={this.state.thumbnail_image_id}
+                             onSelectionChange={this.handleThumbnailChooserImagesChange}/>
+               : ""}
+               {this.state.showImagesImageChooser
+               ?
                <ImageChooser collectionId={this.props.match.params.id}
                              onSelectionChange={this.handleChooserImagesChange}/>
-              <button className="edit_collection_info_save button"
-                      onClick={this.patchCollection}>
-                Save
-              </button>
+               : ""}
              </div>
 
              <br/>
