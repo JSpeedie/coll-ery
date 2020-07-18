@@ -66,16 +66,18 @@
 	color: #FFFFFF;
 }
 
+.gallery_item_top {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .gallery_item_preview {
 	/* Necessary for stacking gallery_item_info_div */
 	position: relative;
-}
-
-.gallery_item_preview_image {
-	/* Center the img in its container */
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
+	flex-basis: content;
+	justify-content: center;
+	align-items: center;
 }
 
 .gallery_item_info_div {
@@ -90,6 +92,8 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .gallery_item_info_div:hover {
