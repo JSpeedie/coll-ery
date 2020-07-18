@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ImageChooserItem from './ImageChooserItem';
+import ImageChooserItem from './ImageChooserItem.jsx';
 
 class ImageChooser extends Component{
 
@@ -39,8 +39,8 @@ class ImageChooser extends Component{
 		return(
           <div className="image_chooser">
             <div className="image_chooser_images">
-              {this.state.all_images.map((img) => 
-                  <ImageChooserItem 
+              {this.state.all_images.map((img) =>
+                  <ImageChooserItem
                                key={img._id}
                                isInCollection={this.state.collection_images.includes(img._id)}
                                imageId={img._id}

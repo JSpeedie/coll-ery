@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 
-import ImageGallery from './ImageGallery';
-import NavBar from './NavBar';
+import ImageGallery from './ImageGallery.jsx';
+import NavBar from './NavBar.jsx';
 
 class PageCollectionView extends Component{
 

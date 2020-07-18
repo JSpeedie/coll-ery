@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import NavBar from './NavBar';
-import ImageChooser from './ImageChooser';
-import SingleImageChooser from './SingleImageChooser';
+import NavBar from './NavBar.jsx';
+import ImageChooser from './ImageChooser.jsx';
+import SingleImageChooser from './SingleImageChooser.jsx';
 
 class PageCollectionEdit extends Component{
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ImageChooserItem from './ImageChooserItem';
+import ImageChooserItem from './ImageChooserItem.jsx';
 
 class SingleImageChooser extends Component{
 

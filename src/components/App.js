@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import PageCollectionAdd from './PageCollectionAdd';
-import PageCollectionEdit from './PageCollectionEdit';
-import PageCollectionView from './PageCollectionView';
-import PageError from './PageError';
-import PageGallery from './PageGallery';
-import PageImageAdd from './PageImageAdd';
-import PageImageEdit from './PageImageEdit';
-import PageImageView from './PageImageView';
+import PageCollectionAdd from './PageCollectionAdd.jsx';
+import PageCollectionEdit from './PageCollectionEdit.jsx';
+import PageCollectionView from './PageCollectionView.jsx';
+import PageError from './PageError.jsx';
+import PageGallery from './PageGallery.jsx';
+import PageImageAdd from './PageImageAdd.jsx';
+import PageImageEdit from './PageImageEdit.jsx';
+import PageImageView from './PageImageView.jsx';
 
 class App extends Component {
 

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import ImageGallery from './ImageGallery';
-import CollectionGallery from './CollectionGallery';
-import NavBar from './NavBar';
+import ImageGallery from './ImageGallery.jsx';
+import CollectionGallery from './CollectionGallery.jsx';
+import NavBar from './NavBar.jsx';
 
 class PageGallery extends Component{
 

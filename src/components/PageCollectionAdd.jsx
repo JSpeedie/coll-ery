@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import NavBar from './NavBar';
+import NavBar from './NavBar.jsx';
 
 class PageCollectionAdd extends Component {
 
@@ -26,7 +26,7 @@ class PageCollectionAdd extends Component {
 	handleDescriptionChange(e) {
 		this.setState({ description: e.target.value });
 	}
-	
+
 	handleThumbnailIdChange(e) {
 		this.setState({ thumbnail_image_id: e.target.value });
 	}

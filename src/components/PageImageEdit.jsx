@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import NavBar from './NavBar';
+import NavBar from './NavBar.jsx';
 
 class PageImageEdit extends Component{
 
@@ -32,7 +32,7 @@ class PageImageEdit extends Component{
 	handleDescriptionChange(e) {
 		this.setState({ description: e.target.value });
 	}
-	
+
 	// handleImageFileChange(e) {
 	// 	console.log(e.target.files[0])
 	// 	this.setState({ image: e.target.files[0] })

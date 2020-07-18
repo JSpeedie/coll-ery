@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import update from 'react-addons-update';
 
-import GalleryItem from './GalleryItem';
-import GalleryItemImage from './GalleryItemImage';
+import GalleryItem from './GalleryItem.jsx';
+import GalleryItemImage from './GalleryItemImage.jsx';
 
 class ImageGallery extends Component{
 
