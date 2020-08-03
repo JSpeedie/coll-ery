@@ -83,8 +83,8 @@ class PageImageView extends Component {
                        Author: {this.state.image.author_name}
                        <br />
                        Date taken: {this.state.image.date_taken}
-                       <br />
-                       <br />
+                     </p>
+                     <p className="view_image_info_desc">
                        {this.state.image.description}
                        <br />
                      </p>
