@@ -10,7 +10,8 @@ class NavBar extends Component{
 	render(){
 		return(
           <div className="navbar">
-            <Link className="navbar_link" to="/">Gallery</Link>
+            <Link className="navbar_link" to="/signin">Sign In</Link>
+            <Link className="navbar_link" to="/signup">Sign Up</Link>
             <Link className="navbar_link" to="/collection/add">Create Collection</Link>
             <Link className="navbar_link" to="/image/add">Upload an Image</Link>
           </div>
