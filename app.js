@@ -725,6 +725,73 @@ app.post('/api/users/', async (req, res, next) => {
 		console.log(err);
 	}
 });
+
+/* Login as a user */
+app.post('/api/users/signin/', isAuthenticated, async (req, res, next) => {
+	let search = {
+		username: req.body.username
+	};
+							console.log("username was not setto");
+							req.session.username ="results.username";
+
+	try {
+		// const salt = await bcrypt.genSalt();
+		// const saltAndHashedPass = await bcrypt.hash(req.body.password, salt);
+		// const searchAccount = {
+		// 	user: req.body.username,
+		// 	password: saltAndHashedPass
+		// }
+
+		MongoClient.connect(mongoUrl, mongoOptions, function(err, client) {
+			const db = client.db('coll-ery');
+
+			let searchPromise = function() {
+				return new Promise((resolve, reject) => {
+					// TODO: handle errors, avoid toArray()
+					db.collection('users').find(search).toArray(function(err, data) {
+						if (err) {
+							// TODO: this does not work, incorrect login crashes
+							console.log("ERROR: Could not find collections");
+							reject(err)
+						} else {
+							resolve(data[0]);
+						}
+					});
+				});
+			};
+
+			/* Define function for calling search and waiting for results */
+			let callSearchPromise = async function() {
+				let results = await (searchPromise());
+
+				bcrypt.compare(req.body.password, results.password, () => {
+					if (err) {
+						return res.status(500)
+					} else {
+						// TODO: login?
+						/* Start a session (aka login) */
+						// req.session.username = results.username;
+						// if (!req.session.username) {
+						// }
+						// req.session.save();
+						console.log("User \"" + results.username + "\" signed in");
+						// res.end();
+						res.status(200)
+						next();
+					}
+				});
+
+			}
+
+			/* Do necessary work after search promise returns */
+			callSearchPromise().then(function(results) {
+				client.close();
+			});
+		});
+	} catch (err) {
+		console.log(err);
+	}
+});
 const http = require('http');
 const PORT = 3000;
 
