@@ -53,7 +53,7 @@ class PageCollectionView extends Component{
                </div>
              </div>
 
-             <ImageGallery collectionId={this.props.match.params.id}/>
+             <ImageGallery loadAll={true} collectionId={this.props.match.params.id}/>
 
              <br/>
              <br/>
