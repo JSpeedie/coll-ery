@@ -666,6 +666,65 @@ app.delete('/api/collections/:id/', function (req, res, next) {
 
 
 
+/* Add new user to gallery */
+app.post('/api/users/', async (req, res, next) => {
+	try {
+		bcrypt.hash(req.body.password, 10, (err, saltedAndHashedPass) => {
+			const newAccount = {
+				username: req.body.username,
+				password: saltedAndHashedPass
+			}
+
+			MongoClient.connect(mongoUrl, mongoOptions, function(err, client) {
+
+				const db = client.db('coll-ery');
+
+				let insertPromise = function() {
+					return new Promise((resolve, reject) => {
+						try {
+							let inserted;
+							db.collection('users').findOne({ username: req.body.username }, (err, doc) => {
+								/* If a user of this name does not already exist */
+								if (!doc) {
+									inserted = db.collection('users').insertOne(newAccount);
+									console.log("inserting new user with id of " + inserted.insertedId);
+									resolve(inserted);
+								} else {
+									console.log("Failed to inserting new user; User of name \"" + req.body.username + "\" already exists");
+									// TODO: fix promise rejection here
+									// reject(req.body.username);
+								}
+							});
+						/* Catch insertion errors */
+						} catch (err) {
+							reject(inserted);
+							console.log(err);
+						}
+					});
+				};
+
+				/* Define function for calling insert and waiting for result */
+				let callInsertPromise = async function() {
+					let result = await (insertPromise());
+					result.then(() => {
+						return result;
+					}).catch(function() {
+						return null;
+					});
+
+				}
+
+				/* Do necessary work after insert promise returns */
+				callInsertPromise().then(function(result) {
+					client.close();
+					res.json(newAccount);
+				});
+			});
+		});
+	} catch (err) {
+		console.log(err);
+	}
+});
 const http = require('http');
 const PORT = 3000;
 
