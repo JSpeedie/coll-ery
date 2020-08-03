@@ -9,6 +9,8 @@ import PageGallery from './PageGallery.jsx';
 import PageImageAdd from './PageImageAdd.jsx';
 import PageImageEdit from './PageImageEdit.jsx';
 import PageImageView from './PageImageView.jsx';
+import PageSignin from './PageUserSignin.jsx';
+import PageSignup from './PageUserSignup.jsx';
 
 class App extends Component {
 
@@ -28,6 +30,8 @@ class App extends Component {
               <Route path='/image/edit/:id' component={PageImageEdit} />
               <Route path='/image/:id' component={PageImageView} />
               <Route path='/collection/:collectionId/:id' component={PageImageView} exact />
+              <Route path='/signin' component={PageSignin} />
+              <Route path='/signup' component={PageSignup} exact />
               <Route component={PageError} />
             </Switch>
           </div>
