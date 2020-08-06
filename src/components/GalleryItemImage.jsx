@@ -34,23 +34,12 @@ class GalleryItemImage extends Component{
                    ? "/collection/" + this.props.collectionId + "/" + this.props.imageId
                    : "/image/" + this.props.imageId}>
                  <img className="gallery_item_preview_image"
-                      src={"http://localhost:3000/api/img/thumbnail/" + this.props.previewImageId + "/"}
-                      height="400"/>
+                      src={"http://localhost:3000/api/img/thumbnail/" + this.props.previewImageId + "/"} />
                  <div className="gallery_item_info_div">
-                   <p className="gallery_item_info">{this.props.description}</p>
+                   <p className="gallery_item_info_title">{this.props.title}</p>
+                   <p className="gallery_item_info_description">{this.props.description}</p>
                  </div>
                </Link>
-             </div>
-             <div className="gallery_item_title">{this.props.title}
-               <div className="gallery_item_title_controls">
-                 <Link className="gallery_item_title_control"
-                       to={"/image/edit/" + this.props.imageId}>
-                   E
-                 </Link>
-                 <div className="gallery_item_title_control" onClick={this.deleteItem}>
-                   X
-                 </div>
-               </div>
              </div>
            </div>
 		);
