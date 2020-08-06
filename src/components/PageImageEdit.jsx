@@ -11,12 +11,13 @@ class PageImageEdit extends Component{
 			title: "title",
 			author_name: "author_name",
 			description: "description",
-			date_taken: "date_taken"
+			date_taken: "date_taken",
+			image: null,
 		}
 		this.handleTitleChange = this.handleTitleChange.bind(this);
 		this.handleAuthorNameChange = this.handleAuthorNameChange.bind(this);
 		this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
-		// this.handleImageFileChange = this.handleImageFileChange.bind(this);
+		this.handleImageFileChange = this.handleImageFileChange.bind(this);
 		this.handleDateTakenChange = this.handleDateTakenChange.bind(this);
 		this.patchImage = this.patchImage.bind(this);
 	}
@@ -33,29 +34,28 @@ class PageImageEdit extends Component{
 		this.setState({ description: e.target.value });
 	}
 
-	// handleImageFileChange(e) {
-	// 	console.log(e.target.files[0])
-	// 	this.setState({ image: e.target.files[0] })
-	// }
+	handleImageFileChange(e) {
+		this.setState({ image: e.target.files[0] })
+	}
 
 	handleDateTakenChange(e) {
 		this.setState({ date_taken: e.target.value });
 	}
 
-	patchImage() {
+	patchImage(e) {
+		e.preventDefault();
+
+		var formData = new FormData();
+
+		formData.append("image_title", this.state.title);
+		formData.append("image_author_name", this.state.author_name);
+		formData.append("image_description", this.state.description);
+		formData.append("image_date_taken", this.state.date_taken);
+		formData.append("image_file", this.state.image);
+
 		fetch("http://localhost:3000/api/images/" + this.state._id + "/", {
 			method: 'PATCH',
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				_id: this.state._id,
-				title: this.state.title,
-				date_taken: this.state.date_taken,
-				description: this.state.description,
-				author_name: this.state.author_name
-			})
+			body: formData
 		})
 		// }).then(response => response.json()).then(response => {
 			// TODO: make use of response here
@@ -132,6 +132,18 @@ class PageImageEdit extends Component{
                                className="form_element edit_image_info_description_input"
                                value={this.state.description}
                                onChange={this.handleDescriptionChange}></textarea>
+                   </div>
+                   <div className="edit_image_info_image">
+                     <p className="edit_image_edit_field_image">
+                       Image:
+                     </p>
+                     <input type="file"
+                            id="upload_image_file"
+                            className="form_file_browse"
+                            name="image_file"
+                            accept="image/png, image/jpeg"
+                            onChange={this.handleImageFileChange}
+                            required />
                    </div>
                    <div className="edit_image_info_date_taken">
                      <p className="edit_image_edit_field_desc">
