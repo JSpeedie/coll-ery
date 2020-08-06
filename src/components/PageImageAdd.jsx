@@ -35,9 +35,8 @@ class PageImageAdd extends Component {
 	handleDescriptionChange(e) {
 		this.setState({ description: e.target.value });
 	}
-	
+
 	handleImageFileChange(e) {
-		console.log(e.target.files[0])
 		this.setState({ image: e.target.files[0] })
 	}
 
@@ -101,13 +100,11 @@ class PageImageAdd extends Component {
                       name="image_author_name"
                       onChange={this.handleAuthorNameChange}
                       required />
-               <input type="text"
-                      id="upload_image_description"
-                      className="form_element"
-                      placeholder="Enter a description"
-                      name="image_description"
-                      onChange={this.handleDescriptionChange}
-                      required />
+              <textarea type="text"
+                        id="upload_image_description"
+                        className="form_element upload_image_info_description_input"
+                        placeholder="Enter a description"
+                        onChange={this.handleDescriptionChange}></textarea>
                <input type="file"
                       id="upload_image_file"
                       className="form_file_browse"
