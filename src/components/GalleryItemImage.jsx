@@ -29,17 +29,15 @@ class GalleryItemImage extends Component{
 		return(
            <div className="gallery_item_container">
              <div className="gallery_item_top">
-               <Link className="gallery_item_preview" to=
-                 {this.props.collectionId
-                   ? "/collection/" + this.props.collectionId + "/" + this.props.imageId
-                   : "/image/" + this.props.imageId}>
+               <div className="gallery_item_preview"
+                    onClick={ () => this.props.onClick() }>
                  <img className="gallery_item_preview_image"
                       src={"http://localhost:3000/api/img/thumbnail/" + this.props.previewImageId + "/"} />
                  <div className="gallery_item_info_div">
                    <p className="gallery_item_info_title">{this.props.title}</p>
                    <p className="gallery_item_info_description">{this.props.description}</p>
                  </div>
-               </Link>
+               </div>
              </div>
            </div>
 		);
