@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import ImageGallery from './ImageGallery.jsx';
 import CollectionGallery from './CollectionGallery.jsx';
@@ -20,16 +21,12 @@ class PageGallery extends Component{
              <NavBar />
 
              <br/>
-             <h2>Images</h2>
+             <h2><Link to="/images">Images</Link></h2>
              <br/>
 
-             <ImageGallery />
-
              <br/>
-             <h2>Collections</h2>
+             <h2><Link to="/collections">Collections</Link></h2>
              <br/>
-
-             <CollectionGallery />
 
              <br/>
              <br/>
