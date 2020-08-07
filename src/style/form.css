@@ -31,6 +31,7 @@
 }
 
 .form_element {
+	font-family: DejaVu, sans-serif;
 	font-size: 20px;
 	border: 0px;
 	border-bottom: 2px solid #548ca5;
