@@ -78,6 +78,7 @@ footer {
 }
 
 .Gallery, .CollectionView, .ImageEdit, .CollectionEdit {
+	position: relative;
 	width: 85%;
 }
 
