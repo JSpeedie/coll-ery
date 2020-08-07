@@ -6,6 +6,8 @@ import PageCollectionEdit from './PageCollectionEdit.jsx';
 import PageCollectionView from './PageCollectionView.jsx';
 import PageError from './PageError.jsx';
 import PageGallery from './PageGallery.jsx';
+import PageGalleryImages from './PageGalleryImages.jsx';
+import PageGalleryCollections from './PageGalleryCollections.jsx';
 import PageImageAdd from './PageImageAdd.jsx';
 import PageImageEdit from './PageImageEdit.jsx';
 import PageImageView from './PageImageView.jsx';
@@ -23,9 +25,11 @@ class App extends Component {
           <div className="App">
 			<Switch>
               <Route path='/' component={PageGallery} exact />
+              <Route path='/collections' component={PageGalleryCollections} exact />
               <Route path='/collection/add' component={PageCollectionAdd} />
               <Route path='/collection/edit/:id' component={PageCollectionEdit} />
               <Route path='/collection/:id' component={PageCollectionView} exact />
+              <Route path='/images' component={PageGalleryImages} exact />
               <Route path='/image/add' component={PageImageAdd} />
               <Route path='/image/edit/:id' component={PageImageEdit} />
               <Route path='/image/:id' component={PageImageView} />
