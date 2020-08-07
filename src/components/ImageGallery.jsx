@@ -3,6 +3,7 @@ import update from 'react-addons-update';
 
 import GalleryItem from './GalleryItem.jsx';
 import GalleryItemImage from './GalleryItemImage.jsx';
+import PopupViewImage from './PopupViewImage.jsx';
 
 class ImageGallery extends Component{
 
@@ -11,10 +12,11 @@ class ImageGallery extends Component{
 		this.state = {
 			images: [],
 			sliceStart: 0,
-			sliceEnd: 10
+			sliceEnd: 5
 		}
 		this.increaseSlice = this.increaseSlice.bind(this);
 		this.maxSlice = this.maxSlice.bind(this);
+		this.handleViewImageChange = this.handleViewImageChange.bind(this);
 	}
 
 	increaseSlice() {
@@ -31,6 +33,10 @@ class ImageGallery extends Component{
 		})
 	}
 
+	handleViewImageChange(id) {
+		this.setState({ viewed_image: id });
+	}
+
 	render() {
 		let galleryImages = this.state.images;
 
@@ -44,7 +50,8 @@ class ImageGallery extends Component{
                                 imageId={img._id}
                                 previewImageId={img._id}
                                 description={img.description}
-                                title={img.title}/>
+                                title={img.title}
+                                onClick={ () => this.handleViewImageChange(img._id) }/>
 			);
 
 		return(
@@ -66,6 +73,12 @@ class ImageGallery extends Component{
                   </p>
                 </div>
               : ""}
+
+             {this.state.viewed_image
+             ? <PopupViewImage imageId={this.state.viewed_image}
+                               collectionId={this.props.collectionId}
+                               onExit={this.handleViewImageChange}/>
+             : ""}
           </div>
 		);
 	}
