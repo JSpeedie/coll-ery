@@ -1,5 +1,6 @@
 html {
 	overflow: -moz-scrollbars-vertical;
+	height: 100%;
 }
 
 .slimmer_body {
