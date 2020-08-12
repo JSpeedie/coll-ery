@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import GalleryItem from './GalleryItem.jsx';
+import GalleryItemCollection from './GalleryItemCollection.jsx';
 
 class CollectionGallery extends Component {
 
@@ -16,7 +16,7 @@ class CollectionGallery extends Component {
 		return(
           <div className="collection_gallery">
             {this.state.collections.slice(this.state.sliceStart, this.state.sliceEnd).map((c) =>
-                <GalleryItem key={c._id}
+                <GalleryItemCollection key={c._id}
                              collectionId={c._id}
                              previewImageId={c.thumbnail_image_id}
                              description={c.description}
