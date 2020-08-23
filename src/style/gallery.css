@@ -28,12 +28,11 @@
 	position: relative;
 	/* background: #548ca5; */
 	color: #111111;
+	font-size: 2vh;
+	font-weight: 900;
 	padding: 10px;
 	padding-top: 20px;
 	text-align: center;
-	font-size: 16px;
-	font-style: oblique;
-	letter-spacing: 0.1em;
 }
 
 .gallery_item_title_controls {
@@ -129,7 +128,17 @@
 	font-weight: 900;
 }
 
+.gallery_item_collection_container {
+	transition-duration: 0.15s;
+	padding: 1vh;
+}
+
+.gallery_item_collection_container:hover {
+	background: #00000011;
+}
+
 .gallery_item_collection_top {
+	transition-duration: 0.3s;
 	border: 1vh solid white;
 }
 

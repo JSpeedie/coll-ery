@@ -20,13 +20,32 @@ class PageGallery extends Component{
 
              <NavBar />
 
-             <br/>
-             <h2><Link to="/images">Images</Link></h2>
-             <br/>
+             <Link className="homepage_section_title hide_link" to="/images">
+               <div className="homepage_link_section">
+                 <img className="homepage_link_bg_image"
+                      src="http://localhost:3000/api/img/5f10bfc2d609da4fd8e26ac2/"/>
+                 <div className="homepage_link_info">
+                   <br/>
+                     <p className="homepage_section_title">Images</p>
+                   <br/>
+                 </div>
+               </div>
+             </Link>
 
              <br/>
-             <h2><Link to="/collections">Collections</Link></h2>
              <br/>
+
+             <Link className="homepage_section_title hide_link" to="/collections">
+               <div className="homepage_link_section">
+                 <img className="homepage_link_bg_image"
+                      src="http://localhost:3000/api/img/5f249c4e9c4d9331b91cd96e/"/>
+                 <div className="homepage_link_info">
+                   <br/>
+                     <p className="homepage_section_title">Collections</p>
+                   <br/>
+                 </div>
+               </div>
+             </Link>
 
              <br/>
              <br/>

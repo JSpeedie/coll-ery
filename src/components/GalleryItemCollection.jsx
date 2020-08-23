@@ -42,10 +42,10 @@ class GalleryItemCollection extends Component{
 		);
 
 		return(
-           <div className="gallery_item_collection_container">
+         <Link className="gallery_item_collection_container hide_link"
+                 to={"/collection/" + this.props.collectionId}>
              <div className="gallery_item_collection_top">
-               <Link className="gallery_item_preview"
-                     to={"/collection/" + this.props.collectionId}>
+               <div className="gallery_item_preview">
                  <img className="gallery_item_preview_image"
                       src={"http://localhost:3000/api/img/thumbnail/" + this.props.previewImageId + "/"}
                       height="400"/>
@@ -53,12 +53,12 @@ class GalleryItemCollection extends Component{
                    {collectionImages}
                  </div>
 
-               </Link>
+               </div>
              </div>
-             <div className="gallery_item_title">
-               {this.props.title}
-             </div>
+           <div className="gallery_item_title">
+             {this.props.title}
            </div>
+         </Link>
 		);
 	}
                  // <div className="gallery_item_info_div">
