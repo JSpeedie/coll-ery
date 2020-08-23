@@ -236,7 +236,7 @@ app.get('/api/img/thumbnail/:id/', function (req, res, next) {
 				if (result != null) {
 					/* result.x must match name in object inserted into Datastore */
 					res.setHeader('Content-Type', result.image.mimetype);
-					var thumbnailImagePath = 
+					var thumbnailImagePath =
 						result.image.destination + "thumbnail-"
 						+ result.image.filename;
 
@@ -316,12 +316,19 @@ app.get('/api/images/', function (req, res, next) {
 });
 
 /* Change the information attached to an image in the gallery */
-app.patch('/api/images/:id/', function (req, res, next) {
+app.patch('/api/images/:id/', upload.single('image_file'), function (req, res, next) {
 	let search = {
 		_id: ObjectId(req.params.id)
 	};
 
-	let newImage = req.body;
+	let newImage = {
+		title: req.body.image_title,
+		date_taken: req.body.image_date_taken,
+		description: req.body.image_description,
+		author_name: req.body.image_author_name,
+		/* This must be req.file as opposed to req.body.x or something */
+		image: req.file,
+	};
 
 	try {
 		MongoClient.connect(mongoUrl, mongoOptions, function(err, client) {
@@ -331,13 +338,25 @@ app.patch('/api/images/:id/', function (req, res, next) {
 			let updatePromise = function() {
 				return new Promise((resolve, reject) => {
 					try {
-						let updated = db.collection('images').findOneAndUpdate(search,
-							{$set: { title: newImage.title,
+						let update;
+						/* If a new image was specified, change image in database */
+						if (newImage.image) {
+							update = {$set: { title: newImage.title,
+								date_taken: newImage.date_taken,
+								description: newImage.description,
+								author_name: newImage.author_name,
+								image: newImage.image }
+							}
+						} else {
+							update = {$set: { title: newImage.title,
 								date_taken: newImage.date_taken,
 								description: newImage.description,
 								author_name: newImage.author_name }
-							});
-							resolve(updated);
+							}
+						}
+						let updated =
+							db.collection('images').findOneAndUpdate(search, update);
+						resolve(updated);
 					/* Catch update errors */
 					} catch (err) {
 						reject(updated);
